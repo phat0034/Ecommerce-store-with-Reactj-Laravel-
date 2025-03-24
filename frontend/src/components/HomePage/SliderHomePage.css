@@ -1,0 +1,10 @@
+.slick-slide {
+  padding-right: 5px;
+  padding-left: 5px;
+  }
+
+  /* the parent */
+  .slick-list {
+    margin-left:0;
+  }
+

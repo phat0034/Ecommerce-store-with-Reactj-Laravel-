@@ -1,0 +1,99 @@
+.slick-slider {
+    position: relative;
+    overflow: hidden;
+
+}
+
+.slick-dots {
+
+    top: 90%;
+}
+
+
+.slick-dots li button:before {
+    font-size: 12px !important;
+    /* Giảm kích thước để viền trông rõ hơn */
+    color: #464646 !important;
+    /* Làm cho phần trong suốt */
+    opacity: 1 !important;
+    border-radius: 50%;
+    border-color: #ccc;
+
+    /* Làm cho viền tròn */
+    width: 15px;
+    /* Điều chỉnh kích thước tổng thể */
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slick-dots li.slick-active button:before {
+    border-color: #ccc;
+    color: red !important;
+    opacity: 1 !important;
+
+}
+
+@media only screen and (min-width: 340px) {
+    .slick-slider {
+        position: relative;
+    }
+
+    .slick-dots {
+
+        top: 80%;
+    }
+
+    .slick-dots li button:before {
+        font-size: 5px !important;
+        /* Giảm kích thước để viền trông rõ hơn */
+        color: #464646 !important;
+        /* Làm cho phần trong suốt */
+        opacity: 1 !important;
+        border-radius: 50%;
+        border-color: #ccc;
+
+        /* Làm cho viền tròn */
+        width: 5px;
+        /* Điều chỉnh kích thước tổng thể */
+        height: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .slick-dots li.slick-active button:before {
+        border-color: #ccc;
+        color: red !important;
+        opacity: 1 !important;
+    
+    }
+}
+@media only screen and (min-width: 768px) {
+    .slick-slider {
+        position: relative;
+    }
+
+    .slick-dots {
+
+        top: 80%;
+    }
+
+    .slick-dots li button:before {
+        font-size: 12px !important;
+        /* Giảm kích thước để viền trông rõ hơn */
+        color: #464646 !important;
+        /* Làm cho phần trong suốt */
+        opacity: 1 !important;
+        border-radius: 50%;
+        border-color: #ccc;
+
+        /* Làm cho viền tròn */
+        width: 15px;
+        /* Điều chỉnh kích thước tổng thể */
+        height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

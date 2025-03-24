@@ -1,0 +1,33 @@
+.slick-slider{
+    position: relative;
+}
+.slick-dots  {
+    padding: 5%;
+    margin-top: 0;
+    bottom: 10%;
+}
+
+.slick-dots li button:before {
+    font-size: 12px !important;
+    /* Giảm kích thước để viền trông rõ hơn */
+    color: #464646 !important;
+    /* Làm cho phần trong suốt */
+    opacity: 1 !important;
+    border-radius: 50%;
+    border-color: #ccc;
+ 
+    /* Làm cho viền tròn */
+    width: 15px;
+    /* Điều chỉnh kích thước tổng thể */
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slick-dots li.slick-active button:before {
+    border-color: #ccc;
+    color: red !important;
+    opacity: 1 !important;
+    
+}
