@@ -50,21 +50,12 @@ This project is licensed under the MIT License.
 
 - [@Minh Phat](https://www.facebook.com/braindoti/)
 
-
-## Features
-
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
-
-
 ## ⚡ Setup Instructions
 #### 🔹 Backend (Laravel 11)
 ##### Clone the repository:
 ```bash 
-git clone https://github.com/your-username/e-commerce-app.git
-cd e-commerce-app/backend
+git clone https://github.com/phat0034/Ecommerce-store-with-Reactj-Laravel-.git
+cd TechStore/backend
 ```
 #####  Install dependencies:
 ```bash 
