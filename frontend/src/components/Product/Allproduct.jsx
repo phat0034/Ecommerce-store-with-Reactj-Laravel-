@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, useParams,Link } from 'react-router-dom'
 import { assets } from '../../assets/assets'
 
 const Allproduct = () => {
@@ -202,8 +202,8 @@ const Allproduct = () => {
                       </p>
                       <div className='absolute z-1 top-2 right-2'>
                         <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                          <a
-                            href=''
+                          <Link
+                            to=''
                             className='  absolute top-[25%] left-[20%]'
                           >
                             <svg
@@ -220,11 +220,11 @@ const Allproduct = () => {
                                 d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                               />
                             </svg>
-                          </a>
+                          </Link>
                         </div>
                         <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                          <a
-                            href={`/detailproduct/${product.id}`}
+                          <Link
+                            to={`/detailproduct/${product.id}`}
                             className='  absolute top-[25%] left-[20%]'
                           >
                             <svg
@@ -246,7 +246,7 @@ const Allproduct = () => {
                                 d='M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
                               />
                             </svg>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                       <h3 className='text-[15px] font-bold'>

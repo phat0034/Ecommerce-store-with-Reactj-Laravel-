@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\address;
+use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\user;
@@ -22,7 +22,7 @@ class UserController extends Controller
             ]);
         }
         try {
-            $user = new user();
+            $user = new User();
             $user->name = $req->input('name');
             $user->email = $req->input('email');
             $user->password = hash::make($req->input('password'));
@@ -200,7 +200,7 @@ class UserController extends Controller
     function addAddress(Request $req)
     {
 
-        $address = new address();
+        $address = new Address();
         $user = new User();
         try {
             $idUser = Auth::id();
@@ -236,7 +236,7 @@ class UserController extends Controller
     }
     function showAddress(Request $req)
     {
-        $address = new address();
+        $address = new Address();
         try {
             $idUser = Auth::id();
 
@@ -260,7 +260,7 @@ class UserController extends Controller
     }
     function showAddressAdmin(Request $req)
     {
-        $address = new address();
+        $address = new Address();
         try {
             $idUser = $req->input('id');
             $addressdata = address::where('user_id', $idUser)->get();
@@ -278,7 +278,7 @@ class UserController extends Controller
     function editAddress(Request $req)
     {
 
-        $address = new address();
+        $address = new Address();
         $user = new User();
         try {
             $idUser = Auth::id();
@@ -327,7 +327,7 @@ class UserController extends Controller
     function deleteAddress(Request $req)
     {
 
-        $address = new address();
+        $address = new Address();
         try {
             $idUser = Auth::id();
 
@@ -362,7 +362,7 @@ class UserController extends Controller
     function updateAddress(Request $req)
     {
 
-        $address = new address();
+        $address = new Address();
         $user = new User();
         try {
             $idUser = Auth::id();

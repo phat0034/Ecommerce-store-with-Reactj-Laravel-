@@ -51,7 +51,7 @@ function SideBar () {
               'border border-1  shadow-xl scale-105 bg-white'
             }`}
           >
-            <a href={item.route_name}>{item.title}</a>
+            <Link to={item.route_name}>{item.title}</Link>
           </li>
         ))}
       </ul>

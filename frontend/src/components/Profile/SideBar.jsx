@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { assets } from '../../assets/assets'
-import { useLocation } from 'react-router-dom'
+import { useLocation,Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 function SideBar () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const locationRoute = useLocation()
   const token = Cookies.get('authToken')
   const sideBar = [
@@ -20,7 +21,7 @@ function SideBar () {
   const [dataFetch, setDataFetch] = useState({})
   const fetchUserInfor = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/getuser', {
+      const response = await fetch(`${API_BASE_URL}/getuser`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -126,7 +127,7 @@ function SideBar () {
                 'border border-1 shadow-xl scale-105 bg-white'
               }`}
             >
-              <a href={item.route_name}>{item.title}</a>
+              <Link to={item.route_name}>{item.title}</Link>
             </li>
           ))}
         </ul>

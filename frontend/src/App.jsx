@@ -1,7 +1,7 @@
 import './App.css'
 import { Header } from './components/Header/Header'
 import Footer from './components/Footer/Footer'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, HashRouter } from 'react-router-dom'
 import { routes } from './routes'
 import SignUp from './components/SignUp/SignUp'
 import Cookies from 'js-cookie'
@@ -17,12 +17,13 @@ function App () {
   return (
     <>
       <Header />
-    
+
       <Routes>
         {routes.map(route => (
           <Route key={route.path} path={route.path} element={<route.page />} />
         ))}
       </Routes>
+
       <Footer />
     </>
   )

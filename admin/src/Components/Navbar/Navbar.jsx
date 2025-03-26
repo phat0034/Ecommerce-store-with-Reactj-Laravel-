@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import reacticon from '../../assets/react.svg'
+import { useLocation,Link  } from 'react-router-dom'
 function Navbar () {
   const [isClick, setIsClick] = useState(false)
 
@@ -8,9 +9,9 @@ function Navbar () {
     <div className='navBar px-16'>
       <div className='flex justify-between p-6'>
         <div className='iconNav my-auto'>
-          <a href='' className='text-3xl '>
+          <Link to='' className='text-3xl '>
             Admin Tech
-          </a>
+          </Link>
         </div>
         <div className='inforAdmin relative'>
           <div
@@ -26,19 +27,19 @@ function Navbar () {
             <div className='absolute right-1 mt-2 bg-[#6e6e6e] p-10 rounded-lg w-80 h-[300px]'>
               <ul>
                 <li>
-                  <a href=''>Logout</a>
+                  <Link to=''>Logout</Link>
                 </li>
                 <li>
-                  <a href=''></a>
+                  <Link to=''></Link>
                 </li>
                 <li>
-                  <a href=''></a>
+                  <Link to=''></Link>
                 </li>
                 <li>
-                  <a href=''></a>
+                  <Link to=''></Link>
                 </li>
                 <li>
-                  <a href=''></a>
+                  <Link to=''></Link>
                 </li>
               </ul>
             </div>

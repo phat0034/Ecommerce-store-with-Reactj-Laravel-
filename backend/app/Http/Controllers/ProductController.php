@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\user;
-use App\Models\product;
-use App\Models\typeproduct;
+use App\Models\Product;
+use App\Models\Typeproduct;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -16,7 +16,7 @@ class ProductController extends Controller
 {
     function addProduct(Request $req)
     {
-        $product = new product();
+        $product = new Product();
         $req->validate([
             'name' => 'required|string',
             'price' => 'required|numeric|min:0',
@@ -65,7 +65,7 @@ class ProductController extends Controller
     function editProduct(Request $req)
     {
         try {
-            $product = new product();
+            $product = new Product();
 
             $productId = $req->input('id');
             $nameProduct =  $req->input('namepd');
@@ -123,7 +123,7 @@ class ProductController extends Controller
     }
     function deleteProduct(Request $req)
     {
-        $product = new product();
+        $product = new Product();
         $id = $req->input('id');
         $namepd = $product::where('id', $id)->value('namepd');
         $replaceName = str_replace(' ', '', $namepd);
@@ -143,7 +143,7 @@ class ProductController extends Controller
     }
     function findProduct(Request $req)
     {
-        $product = new product();
+        $product = new Product();
         try {
             $search = $req->input('s');
             $searchUser =  $product::where('namepd', 'like', '%' . $search . '%')->get();
@@ -286,7 +286,7 @@ class ProductController extends Controller
     function showProductType(Request $req)
     {
         $product = new Product();
-        $type = new typeproduct();
+        $type = new Typeproduct();
         $sort = $req->input('sort', 'asc');
         $typename = $req->input('type');
         $idType = $type->where('name', $typename)->value('id');
@@ -307,7 +307,7 @@ class ProductController extends Controller
     }
     function addType(Request $req)
     {
-        $typeProduct = new typeproduct();
+        $typeProduct = new Typeproduct();
         $req->validate([
             'name' => 'required|string'
         ]);
@@ -321,7 +321,8 @@ class ProductController extends Controller
     }
     function getType(Request $req)
     {
-        $typeProduct = new typeproduct();
+      try {
+        $typeProduct = new Typeproduct();
 
         $allTypes = $typeProduct::all();
 
@@ -329,10 +330,16 @@ class ProductController extends Controller
             'success' => true,
             'data' => $allTypes
         ]);
+      } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'data' => $e->getMessage()
+        ]);
+      }
     }
     function showDetailProduct($id)
     {
-        $product = new product();
+        $product = new Product();
         $detailPD = $product->find($id);
         $detail = DB::table('product as a')
             ->leftJoin('reviews as b', 'b.product_id', '=', 'a.id')
@@ -372,7 +379,7 @@ class ProductController extends Controller
     {
         try {
 
-            $product = new product();
+            $product = new Product();
             $sort = $req->input('sort', 'asc');
             $type = $req->input('categories');
             $price = $req->input('price');

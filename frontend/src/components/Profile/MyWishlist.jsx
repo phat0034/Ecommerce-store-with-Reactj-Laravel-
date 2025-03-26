@@ -8,6 +8,7 @@ import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import Empty from '../Emptypage/Emptypage'
 function MyWishlist () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const token = Cookies.get('authToken')
   const [dataWL, setDataWL] = useState([])
   const [dataCart, setdataCart] = useState({})
@@ -15,7 +16,7 @@ function MyWishlist () {
     setdataCart({ ...dataCart, [id]: quantity })
   }
   const getWishList = async () => {
-    const res = await fetch(`http://127.0.0.1:8000/api/getwl`, {
+    const res = await fetch(`${API_BASE_URL}/getwl`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -33,7 +34,7 @@ function MyWishlist () {
   const addtoCart = async (id, quantity) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/addcart?idproduct=${id}&quantity=${quantity}`,
+        `${API_BASE_URL}/addcart?idproduct=${id}&quantity=${quantity}`,
         {
           method: 'POST',
           headers: {
@@ -51,7 +52,7 @@ function MyWishlist () {
   }
   const deleteWL = async id => {
     const res = await fetch(
-      `http://127.0.0.1:8000/api/removewl?id_wishlist=${id}`,
+      `${API_BASE_URL}/removewl?id_wishlist=${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

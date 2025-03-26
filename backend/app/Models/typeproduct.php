@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class typeproduct extends Model
+class Typeproduct extends Model
 {
     protected $table = 'typeproduct';
     protected $fillable = [

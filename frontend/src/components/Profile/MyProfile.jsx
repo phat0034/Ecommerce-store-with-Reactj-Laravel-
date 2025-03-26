@@ -7,6 +7,7 @@ import SideBar from './SideBar'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 function MyProfile () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [isOpen, setIsOpen] = useState(false)
   const token = Cookies.get('authToken')
   const [userData, setUserData] = useState({
@@ -21,7 +22,7 @@ function MyProfile () {
   }
   const fetchUserInfor = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/getuser', {
+      const response = await fetch(`${API_BASE_URL}/getuser`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -40,7 +41,7 @@ function MyProfile () {
   }
   const changePass = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/changepass', {
+      const response = await fetch(`${API_BASE_URL}/changepass`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,

@@ -5,7 +5,10 @@ import { motion } from 'framer-motion'
 import Cookies from 'js-cookie'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import login from '../login/login'
-import { useLocation } from 'react-router-dom'
+import { useLocation,Link  } from 'react-router-dom'
+const API_HOST = import.meta.env.VITE_API_HOST
+console.log(API_HOST)
+
 export const Header = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -107,9 +110,9 @@ export const Header = () => {
                       >
                         <path d='M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 11 21 L 11 15 L 13 15 L 13 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z M 12 4.7910156 L 18 10.191406 L 18 11 L 18 19 L 15 19 L 15 13 L 9 13 L 9 19 L 6 19 L 6 10.191406 L 12 4.7910156 z'></path>
                       </svg>
-                      <a href='/a' className='my-auto'>
+                      <Link to='/' className='my-auto'>
                         Home
-                      </a>
+                      </Link>
                     </li>
                     <li className=' border-gray-800 flex space-x-2'>
                       <svg
@@ -127,9 +130,9 @@ export const Header = () => {
                         />
                       </svg>
 
-                      <a href='/' target='_blank'>
+                      <Link to='/contact' target='_blank'>
                         Contact
-                      </a>
+                      </Link>
                     </li>
                     <li className=' border-gray-800 flex space-x-2'>
                       <svg
@@ -147,7 +150,7 @@ export const Header = () => {
                         />
                       </svg>
 
-                      <a href=''>About</a>
+                      <Link to='/about'>About</Link>
                     </li>
                     {!token && (
                       <li className=' border-gray-800 flex space-x-2'>
@@ -166,7 +169,7 @@ export const Header = () => {
                           />
                         </svg>
 
-                        <a href='/signup'>Sign Up</a>
+                        <Link to='/signup'>Sign Up</Link>
                       </li>
                     )}
                   </ul>
@@ -182,7 +185,7 @@ export const Header = () => {
               Summer Store For All Swim Suits And Free Express Delivery - OFF
               50%!
             </span>
-            <a href=''> Shop Now</a>
+            <Link to='/allproduct'> Shop Now</Link>
           </div>
           <div className='flex justify-between pt-3 px-24 pb-2 border-b-2 bg-white xl:px-12 lg:p-0 md:px-0 xs:px-2 xl:gap-24'>
             <div className='flex w-full xl:gap-20 lg:gap-6 lg:w-3/5 md:gap-0 xs:w-full xs:justify-between   '>
@@ -201,29 +204,29 @@ export const Header = () => {
                 </button>
               </div>
               <div className='logo my-auto mr-96 md:w-20 md:mx-3 xs:text-sm xs:m-0 xs:my-auto xs:text-[18px] '>
-                <a href=''>Tech Store</a>
+                <Link to=''>Tech Store</Link>
               </div>
               <div className='navBarMenu ml-20 my-auto xs:hidden md:hidden lg:flex   '>
                 <ul className='flex justify-between lg:gap-16 '>
                   <li className='hover:border-b my-auto border-gray-800'>
-                    <a href='/'>Home</a>
+                    <Link to='/'>Home</Link>
                   </li>
                   <li className='hover:border-b  my-auto border-gray-800'>
-                    <a
-                      href='https://www.facebook.com/braindoti/'
+                    <Link
+                      to='https://www.facebook.com/braindoti/'
                       target='_blank'
                     >
                       Contact
-                    </a>
+                    </Link>
                   </li>
                   <li className='hover:border-b my-auto border-gray-800'>
-                    <a href='/about'>About</a>
+                    <Link to='about'>About</Link>
                   </li>
                   {token ? (
                     ''
                   ) : (
                     <li className='hover:border-b my-auto border-gray-800'>
-                      <a href='/signup'>Sign Up</a>
+                      <Link to='/signup'>Sign Up</Link>
                     </li>
                   )}
                 </ul>
@@ -268,7 +271,7 @@ export const Header = () => {
                 />
               </div>
               <div className='flex gap-3 xs:hidden md:flex '>
-                <a href='/mywishlist' className='block m-auto'>
+                <Link to='/mywishlist' className='block m-auto'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -283,8 +286,8 @@ export const Header = () => {
                       d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                     />
                   </svg>
-                </a>
-                <a href='/cart' className='block m-auto cart relative'>
+                </Link>
+                <Link to='/cart' className='block m-auto cart relative'>
                   {countCart > 0 && (
                     <p className='absolute top-[15%] right-[15%]  translate-x-[50%] translate-y-[-50%] bg-gray-500 text-white w-6 h-6 rounded-full text-center grid text-[10px]'>
                       <span className=' my-auto'>{countCart}</span>
@@ -305,7 +308,7 @@ export const Header = () => {
                       d='M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z'
                     />
                   </svg>
-                </a>
+                </Link>
                 {/* -------------------------USER PROFILE AND DROPDOWN---------------------- */}
                 {token ? (
                   <div className='dropdownProfile relative md:flex md:my-auto '>
@@ -325,16 +328,16 @@ export const Header = () => {
                       >
                         <ul className='grid gap-3'>
                           <li>
-                            <a href='/myprofile'>Manage My Account</a>
+                            <Link to='/myprofile'>Manage My Account</Link>
                           </li>
                           <li>
-                            <a href='/myorder'>My Order</a>
+                            <Link to='/myorder'>My Order</Link>
                           </li>
                           <li>
-                            <a href='/mywishlist'>My Wishlist</a>
+                            <Link to='/mywishlist'>My Wishlist</Link>
                           </li>
                           <li>
-                            <a href=''>My Reviews</a>
+                            <Link to=''>My Reviews</Link>
                           </li>
                           <li>
                             <button
@@ -353,12 +356,12 @@ export const Header = () => {
                 ) : (
                   <div className='dropdownProfile relative md:flex md:my-auto '>
                     <button onClick={() => setIsOpen(prev => !prev)}>
-                      <a
-                        href='/login'
+                      <Link
+                        to='/login'
                         className='border p-1 px-3 text-[1rem] rounded-2xl hover:bg-black hover:text-white transition delay-75'
                       >
                         Login
-                      </a>
+                      </Link>
                       {/* <img
                         src={assets.user}
                         alt=''

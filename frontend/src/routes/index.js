@@ -24,7 +24,7 @@ export const routes = [
     page: HomePage
   },
   {
-    path: '/home',
+    path: 'home',
     page: HomePage
   },
   {

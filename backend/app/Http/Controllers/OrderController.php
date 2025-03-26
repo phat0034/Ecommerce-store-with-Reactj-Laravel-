@@ -13,8 +13,8 @@ use Illuminate\Http\Request;
 use App\Models\user;
 use App\Models\product;
 use App\Models\typeproduct;
-use App\Models\order;
-use App\Models\orderdetails;
+use App\Models\Order;
+use App\Models\Orderdetails;
 
 use function PHPUnit\Framework\isNan;
 use function PHPUnit\Framework\isNull;
@@ -23,8 +23,8 @@ class OrderController extends Controller
 {
     function addOrder(Request $req)
     {
-        $order = new order();
-        $detail_order = new orderdetails();
+        $order = new Order();
+        $detail_order = new Orderdetails();
         $iduser = Auth::id();
         $name_order = $req->input('name');
         $address_order = $req->input('address');
@@ -78,8 +78,8 @@ class OrderController extends Controller
     }
     function showOrder(Request $req)
     {
-        $order = new order();
-        $order_details = new orderdetails();
+        $order = new Order();
+        $order_details = new Orderdetails();
         $id_admin = $req->input('admin');
         try {
             if ($id_admin == 'true') {
@@ -113,7 +113,7 @@ class OrderController extends Controller
     }
     function editStatusOrder(Request $req)
     {
-        $order = new order();
+        $order = new Order();
         try {
             $idOrder = $req->input('id');
             $status = $req->input('status');
@@ -130,8 +130,8 @@ class OrderController extends Controller
     }
     function showDetailOrder(Request $req)
     {
-        $order = new order();
-        $order_details = new orderdetails();
+        $order = new Order();
+        $order_details = new Orderdetails();
 
 
         try {
@@ -161,7 +161,7 @@ class OrderController extends Controller
     function getNearOrder()
     {
         try {
-            $order = new order();
+            $order = new Order();
             $id_user =  Auth::id();
             $data = $order::where('user_id', $id_user)->orderBy('id', 'desc')->value('id');
             return response()->json([

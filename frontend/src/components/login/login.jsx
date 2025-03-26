@@ -3,6 +3,7 @@ import { assets } from '../../assets/assets'
 import Cookies from 'js-cookie'
 
 const login = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [dataForm, setDataForm] = useState({
     username: '',
     password: '',
@@ -12,7 +13,7 @@ const login = () => {
     setDataForm({ ...dataForm, [e.target.name]: e.target.value })
   }
   const loginSubmit = async () => {
-    const responseData = await fetch('http://127.0.0.1:8000/api/login', {
+    const responseData = await fetch(`${API_BASE_URL}/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

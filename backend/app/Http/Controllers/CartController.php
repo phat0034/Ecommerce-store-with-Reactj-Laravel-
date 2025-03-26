@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Cart;
-use App\Models\cartitems;
-use App\Models\product;
+use App\Models\Cartitems;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller; // Đảm bảo import lớp này
 use Termwind\Components\Raw;
@@ -22,7 +22,6 @@ class CartController extends Controller
     function addCart(Request $req)
     {
         $cart = new Cart();
-        $cartitems = new cartitems();
         $product = new Product();
         $quantity = $req->input('quantity');
         $idUser =    Auth::id();
@@ -34,11 +33,11 @@ class CartController extends Controller
         if ($isValid) {
             //bỏ qua bước tạo id user của bảng cart,bắt đầu thêm vào bảng itemcart
             $idCart = $cart::where('user_id', $idUser)->value('id');
-            $cartItem = cartitems::where('cart_id', $idCart)->where('product_id', $idProduct)->first();
+            $cartItem = Cartitems::where('cart_id', $idCart)->where('product_id', $idProduct)->first();
             if ($cartItem) {
                 $cartItem->increment('quantity', $quantity);
             } else {
-                cartitems::create([
+                Cartitems::create([
                     'cart_id' => $idCart,
                     'product_id' => $idProduct,
                     'quantity' => $quantity,
@@ -54,7 +53,7 @@ class CartController extends Controller
             $cart->user_id = $idUser;
             $cart->save();
             $idCart = $cart::where('user_id', $idUser)->value('id');
-            cartitems::create([
+            Cartitems::create([
                 'cart_id' => $idCart,
                 'product_id' => $idProduct,
                 'quantity' => $quantity,
@@ -70,7 +69,7 @@ class CartController extends Controller
     function getItemsCart()
     {
         $cart = new Cart();
-        $cartitems = new cartitems();
+        $cartitems = new Cartitems();
         $product = new Product();
         $idUser =    Auth::id();
         $idCart = $cart::where('user_id', $idUser)->value('id');
@@ -88,12 +87,12 @@ class CartController extends Controller
     {
         try {
             $cart = new Cart();
-            $cartitems = new cartitems();
+            $cartitems = new Cartitems();
             $product = new Product();
             $id = $req->input('idproduct');
             $productsIncart = DB::table('product')
                 ->where('id', $id)
-               
+
                 ->get();
             return response()->json([
                 'success' => true,
@@ -109,7 +108,7 @@ class CartController extends Controller
     function countCart()
     {
         $cart = new Cart();
-        $cartitems = new cartitems();
+        $cartitems = new Cartitems();
         $product = new Product();
         $idUser =    Auth::id();
         $idCart = $cart::where('user_id', $idUser)->value('id');
@@ -122,7 +121,7 @@ class CartController extends Controller
     function updateCart(Request  $req, $idProduct)
     {
         $cart = new Cart();
-        $cartitems = new cartitems();
+        $cartitems = new Cartitems();
         $product = new Product();
         $idUser =    Auth::id();
         $quantity = $req->input('quantity');
@@ -138,7 +137,7 @@ class CartController extends Controller
     {
         try {
             $cart = new Cart();
-            $cartitems = new cartitems();
+            $cartitems = new Cartitems();
             $product = new Product();
             $iduser = Auth::id();
             if (!$iduser) {
@@ -164,7 +163,7 @@ class CartController extends Controller
     {
         try {
             $cart = new Cart();
-            $cartitems = new cartitems();
+            $cartitems = new Cartitems();
             $product = new Product();
             $iduser = Auth::id();
             $iditem = $req->input('id');

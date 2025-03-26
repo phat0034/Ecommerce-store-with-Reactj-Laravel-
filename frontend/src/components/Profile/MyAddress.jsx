@@ -8,6 +8,7 @@ import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import Empty from '../Emptypage/Emptypage'
 function MyProfile () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [isOpen, setIsOpen] = useState(false)
   const [refresh, setRefresh] = useState(false)
   const [selectedAddress, setSelectedAddress] = useState(null) // Lưu ID của địa chỉ chọn
@@ -50,7 +51,7 @@ function MyProfile () {
   }
   const getAddress = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/showaddress`, {
+      const response = await fetch(`${API_BASE_URL}/showaddress`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -71,7 +72,7 @@ function MyProfile () {
   }
   const addAddress = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/addaddress', {
+      const response = await fetch(`${API_BASE_URL}/addaddress`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -101,7 +102,7 @@ function MyProfile () {
   const removeAddress = async id => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/deleteaddress?id=${id}`,
+        `${API_BASE_URL}/deleteaddress?id=${id}`,
         {
           method: 'Delete',
           headers: {
@@ -125,7 +126,7 @@ function MyProfile () {
   const editAddress = async id => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/editaddress?id=${id}`,
+        `${API_BASE_URL}/editaddress?id=${id}`,
         {
           method: 'POST',
           headers: {
@@ -154,7 +155,7 @@ function MyProfile () {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/updateaddress?id=${id}`,
+        `${API_BASE_URL}/updateaddress?id=${id}`,
         {
           method: 'POST',
           headers: {

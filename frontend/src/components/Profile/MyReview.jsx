@@ -9,12 +9,13 @@ import Popup from 'reactjs-popup'
 import Empty from '../Emptypage/Emptypage'
 import 'reactjs-popup/dist/index.css'
 function MyOrder () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const token = Cookies.get('authToken')
   const [dataReview, setDataReview] = useState([])
 
   const fetchDataReview = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/getreview`, {
+      const res = await fetch(`${API_BASE_URL}/getreview`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

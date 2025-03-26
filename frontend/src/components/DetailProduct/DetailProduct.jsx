@@ -8,6 +8,7 @@ import { Rating } from 'react-simple-star-rating'
 import Cookies from 'js-cookie'
 import Empty from '../Emptypage/Emptypage'
 function DetailProduct () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const token = Cookies.get('authToken')
   const { id } = useParams()
   const [dataProduct, setDataProduct] = useState(null)
@@ -61,7 +62,7 @@ function DetailProduct () {
     try {
       setDataReview(null)
       const response = await fetch(
-        `http://127.0.0.1:8000/api/getrwpd?id=${id}`,
+        `${API_BASE_URL}/getrwpd?id=${id}`,
         {
           method: 'GET',
           headers: {
@@ -102,7 +103,7 @@ function DetailProduct () {
       window.location.href = '/login'
     } else {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/addcart', {
+        const response = await fetch(`${API_BASE_URL}/addcart`, {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -120,7 +121,7 @@ function DetailProduct () {
   const addtoWishlist = async id => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/addwl?id_product=${id}`,
+        `${API_BASE_URL}/addwl?id_product=${id}`,
         {
           method: 'POST',
           headers: {
@@ -330,7 +331,7 @@ function DetailProduct () {
                             <button
                               onClick={async () => {
                                 await addtoCart()
-                                window.location.href = '/order'
+                                window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/order'
                               }}
                               className='w-full border text-lg px-32 py-4 rounded-lg hover:bg-black hover:text-white transition delay-75 duration-75 md:px-32 xs:px-8'
                             >

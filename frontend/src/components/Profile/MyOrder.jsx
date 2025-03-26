@@ -10,6 +10,7 @@ import 'reactjs-popup/dist/index.css'
 
 import Empty from '../Emptypage/Emptypage'
 function MyOrder () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const token = Cookies.get('authToken')
   const [orderData, setOrderData] = useState([])
   const [detailOrder, setDetailOrder] = useState([])
@@ -31,7 +32,7 @@ function MyOrder () {
     setFormReview({ ...formReview, rating: rate })
   }
   const fetchOrder = async () => {
-    const res = await fetch('http://127.0.0.1:8000/api/getorder', {
+    const res = await fetch('${API_BASE_URL}/getorder', {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -49,7 +50,7 @@ function MyOrder () {
   const addReview = async idpd => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/addreview?id_product=${idpd}`,
+        `${API_BASE_URL}/addreview?id_product=${idpd}`,
         {
           method: 'POST',
           headers: {
@@ -78,7 +79,7 @@ function MyOrder () {
 
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/checkreview?id_product=${idpd}`,
+        `${API_BASE_URL}/checkreview?id_product=${idpd}`,
         {
           method: 'GET',
           headers: {
@@ -103,7 +104,7 @@ function MyOrder () {
   const fetchDetailOrder = async id => {
     setDetailOrder(null)
     const res = await fetch(
-      `http://127.0.0.1:8000/api/getdetailorder?id_order=${id}`,
+      `${API_BASE_URL}/getdetailorder?id_order=${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

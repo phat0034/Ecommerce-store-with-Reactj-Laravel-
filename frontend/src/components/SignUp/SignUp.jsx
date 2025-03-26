@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 const SignUp = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [dataForm, setDataForm] = useState({
     name: '',
     email: '',
@@ -13,7 +14,7 @@ const SignUp = () => {
     setDataForm({ ...dataForm, [e.target.name]: e.target.value })
   }
   const signUpBtn = async () => {
-    const response = await fetch('http://127.0.0.1:8000/api/register', {
+    const response = await fetch(`${API_BASE_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,6 +27,8 @@ const SignUp = () => {
 
     if (dataJson.success) {
       // window.location.replace('/')
+      console.log(response);
+      
       alert('Success')
       Cookies.set('authToken', dataJson.token, { expires: 1 })
       window.location.href = '/'

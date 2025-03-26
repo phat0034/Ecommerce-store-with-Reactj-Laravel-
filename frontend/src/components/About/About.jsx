@@ -45,15 +45,7 @@ function About () {
     <>
       <div className='px-4 sm:px-8 md:px-16 lg:px-24'>
         {/* Breadcrumb Navigation */}
-        <div className='catagoryDIsplay text-xs my-6 sm:my-8 md:my-10 lg:my-12'>
-          <a href='' className='mr-3 text-[#6e6e6e]'>
-            Home
-          </a>
-          /
-          <a href='' className='ml-3 font-semibold'>
-            About
-          </a>
-        </div>
+       
 
         {/* Our Story Section */}
         <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0'>

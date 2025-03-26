@@ -12,12 +12,12 @@ const NotFoundPage = () => {
           The page you are looking for might have been removed, had its name
           changed, or is temporarily unavailable.
         </p>
-        <a
-          href='/'
+        <Link
+          to='/'
           className='mt-6 px-6 py-3 bg-blue-500 text-white rounded-lg text-lg font-medium shadow hover:bg-blue-600 transition'
         >
           Go to Homepage
-        </a>
+        </Link>
       </div>
     
     </>

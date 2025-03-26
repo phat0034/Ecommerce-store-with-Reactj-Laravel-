@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { assets } from '../../assets/assets'
 import Cookies from 'js-cookie'
 import Empty from '../Emptypage/Emptypage'
+
+
 function Cart () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [dataCart, setdataCart] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
   const token = Cookies.get('authToken')
+
 
   const removeItem = async id => {
     try {
@@ -29,7 +33,7 @@ function Cart () {
     }
   }
   const fetchItemsCart = async () => {
-    const response = await fetch('http://127.0.0.1:8000/api/itemscart', {
+    const response = await fetch(`${API_BASE_URL}/itemscart`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`
@@ -42,20 +46,20 @@ function Cart () {
       console.log(data)
     }
   }
-  const fetchGuestCart = async () => {
-    const response = await fetch('http://127.0.0.1:8000/api/itemscart', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    const data = await response.json()
-    if (data.success) {
-      setdataCart(data.data)
-    } else {
-      console.log(data)
-    }
-  }
+  // const fetchGuestCart = async () => {
+  //   const response = await fetch(`${API_BASE_URL}/itemscart`, {
+  //     method: 'GET',
+  //     headers: {
+  //       Authorization: `Bearer ${token}`
+  //     }
+  //   })
+  //   const data = await response.json()
+  //   if (data.success) {
+  //     setdataCart(data.data)
+  //   } else {
+  //     console.log(data)
+  //   }
+  // }
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchItemsCart()
@@ -117,7 +121,7 @@ function Cart () {
                 {dataCart.map(item => (
                   <>
                     <div className='cartTitle relative   grid grid-cols-8 border xl:grid-cols-8 lg:py-4 lg:px-8 group my-8 md:py-2 md:px-4  xs:px-2 xs:my-2   '>
-                      <a className='col-span-2 flex hoverClose cursor-pointer '>
+                      <Link className='col-span-2 flex hoverClose cursor-pointer '>
                         <p
                           onClick={() => removeItem(item.id)}
                           className=' removeItem absolute rounded-full bg-red-500 text-white w-3 h-3 p-3  xl:hidden group-hover:block lg:hidden lg:top-[-5%] lg:left-[-10px]  md:block md:top-[-9%] md:left-[-2%] md:w-3 md:h-3 md:p-3  xs:block xs:top-[-9%] xs:left-[-2%]  '
@@ -126,7 +130,7 @@ function Cart () {
                             x
                           </p>
                         </p>
-                        <a href={`/detailproduct/${item.product_id}`}></a>
+                        <Link to={`/detailproduct/${item.product_id}`}></Link>
                         <img
                           src={`http://localhost:8000/storage/${item.img}`}
                           alt='img'
@@ -135,7 +139,7 @@ function Cart () {
                         <p className='place-content-center font-semibold lg:text-[13px] xs:text-[12px]'>
                           {item.namepd}
                         </p>
-                      </a>
+                      </Link>
                       <p className='col-span-2 place-self-center'>
                         $ {item.price}
                       </p>
@@ -165,12 +169,12 @@ function Cart () {
               </>
             </div>
             <div className='flex justify-between'>
-              <a
-                href=''
+              <Link
+                to=''
                 className='py-3 px-8 border border-[#949494] rounded-md font-semibold'
               >
                 Return To Shop
-              </a>
+              </Link>
               <button
                 href=''
                 className='py-3 px-8 border border-[#949494] rounded-md font-semibold'
@@ -210,12 +214,12 @@ function Cart () {
                   <p>${totalPrice}</p>
                 </div>
                 <div className='w-full flex justify-center'>
-                  <a
-                    href='/order'
+                  <Link
+                    to='/order'
                     className=' py-4 px-10 border rounded-md text-white bg-red-500'
                   >
                     Move to checkout
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

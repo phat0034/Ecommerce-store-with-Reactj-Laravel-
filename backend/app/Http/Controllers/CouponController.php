@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Cart;
-use App\Models\cartitems;
-use App\Models\product;
+use App\Models\Cartitems;
+use App\Models\Product;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller; // Đảm bảo import lớp này
