@@ -8,7 +8,7 @@ import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import Empty from '../Emptypage/Emptypage'
 function MyProfile () {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
   const [isOpen, setIsOpen] = useState(false)
   const [refresh, setRefresh] = useState(false)
   const [selectedAddress, setSelectedAddress] = useState(null) // Lưu ID của địa chỉ chọn

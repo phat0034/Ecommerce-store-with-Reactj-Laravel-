@@ -8,7 +8,8 @@ import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import Empty from '../Emptypage/Emptypage'
 function MyWishlist () {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
   const token = Cookies.get('authToken')
   const [dataWL, setDataWL] = useState([])
   const [dataCart, setdataCart] = useState({})
@@ -175,7 +176,7 @@ function MyWishlist () {
                             {wl.namepd}
                           </h1>
                           <img
-                            src={`http://localhost:8000/storage/${wl.img}`}
+                            src={`${API_BASE}/storage/${wl.img}`}
                             alt=''
                             className='w-36 m-auto'
                           />

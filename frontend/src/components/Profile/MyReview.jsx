@@ -9,7 +9,8 @@ import Popup from 'reactjs-popup'
 import Empty from '../Emptypage/Emptypage'
 import 'reactjs-popup/dist/index.css'
 function MyOrder () {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const token = Cookies.get('authToken')
   const [dataReview, setDataReview] = useState([])
 
@@ -85,7 +86,7 @@ function MyOrder () {
                                 <div className='flex'>
                                   <div className='w-12'>
                                     <img
-                                      src={`http://localhost:8000/storage/${datarv.img}`}
+                                      src={`${API_BASE}/storage/${datarv.img}`}
                                       alt=''
                                     />
                                   </div>

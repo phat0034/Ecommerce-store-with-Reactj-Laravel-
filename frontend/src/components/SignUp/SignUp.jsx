@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 const SignUp = () => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
   const [dataForm, setDataForm] = useState({
     name: '',
     email: '',

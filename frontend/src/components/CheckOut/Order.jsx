@@ -5,6 +5,8 @@ import Cookies from 'js-cookie'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import '../../../src/App.css'
 function Order () {
+  const API_HOST = import.meta.env.VITE_API_BASE_URL_API
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const navigate = useNavigate()
   const token = Cookies.get('authToken')
   const [dataCart, setDataCart] = useState([])
@@ -88,7 +90,7 @@ function Order () {
   }
   const getdataCart = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/itemscart', {
+      const response = await fetch(`${API_HOST}/itemscart`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`
@@ -111,7 +113,7 @@ function Order () {
     }
   }
   const removeallCart = async () => {
-    const response = await fetch('http://127.0.0.1:8000/api/deletecart', {
+    const response = await fetch(`${API_HOST}/deletecart`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`
@@ -130,7 +132,7 @@ function Order () {
   }
   const getNearOrder = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/nearorder', {
+      const response = await fetch(`${API_HOST}/nearorder`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`
@@ -148,7 +150,7 @@ function Order () {
   }
   const addAddress = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/addaddress', {
+      const response = await fetch(`${API_HOST}/addaddress`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -185,7 +187,7 @@ function Order () {
     }))
     if (validateForm()) {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/addorder', {
+        const response = await fetch(`${API_HOST}/addorder`, {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -214,7 +216,7 @@ function Order () {
   }
   const getAddress = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/showaddress`, {
+      const response = await fetch(`${API_HOST}/showaddress`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -249,7 +251,7 @@ function Order () {
       console.log('✅ Form hợp lệ! Tiếp tục bước tiếp theo...')
       try {
         const response = await fetch(
-          'http://127.0.0.1:8000/api/paypal/create-order',
+          `${API_HOST}/paypal/create-order`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -277,7 +279,7 @@ function Order () {
       try {
         // First, capture the order on PayPal's side
         const response = await fetch(
-          `http://127.0.0.1:8000/api/paypal/capture-order/${data.orderID}`,
+          `${API_HOST}/paypal/capture-order/${data.orderID}`,
           {
             method: 'post',
             headers: {
@@ -326,7 +328,7 @@ function Order () {
   }, [idOrder]) // Chạy khi idOrder thay đổi
   const getCouponCode = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/applycp', {
+      const response = await fetch(`${API_HOST}/applycp`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -566,7 +568,7 @@ function Order () {
                   <div className='grid grid-cols-4  mb-6  '>
                     <div className=' flex col-span-2'>
                       <img
-                        src={`http://localhost:8000/storage/${item.img}`}
+                        src={`${API_BASE}/storage/${item.img}`}
                         alt=''
                         className='w-16'
                       />

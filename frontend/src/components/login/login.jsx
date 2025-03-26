@@ -3,7 +3,7 @@ import { assets } from '../../assets/assets'
 import Cookies from 'js-cookie'
 
 const login = () => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
   const [dataForm, setDataForm] = useState({
     username: '',
     password: '',

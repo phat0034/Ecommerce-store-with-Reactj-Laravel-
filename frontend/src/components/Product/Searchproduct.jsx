@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 
 const SearchProduct = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [currentPage, setCurrentPage] = useState(1)
@@ -31,7 +33,7 @@ const SearchProduct = () => {
   const fetchData = async (search, page, sort) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/searchproduct?s=${search}&page=${page}&sort=${sort}&p=12`,
+        `${API_BASE_URL}/searchproduct?s=${search}&page=${page}&sort=${sort}&p=12`,
         {
           method: 'post',
           headers: {
@@ -54,7 +56,7 @@ const SearchProduct = () => {
   }
   const getType = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/alltype`)
+      const response = await fetch(`${API_BASE_URL}/alltype`)
         .then(response => response.json())
         .then(data => {
           setTypedata(data.data)
@@ -193,7 +195,7 @@ const SearchProduct = () => {
                     <div className='cardProduct lg:w-auto  md:h-full  h-auto relative border rounded-lg shadow-lg p-3 '>
                       <div className='xl:h-[300px]  lg:h-[200px] sm:h-[150px]  xs:h-[120px] flex justify-center'>
                         <img
-                          src={`http://localhost:8000/storage/${product.img.replace(
+                          src={`${API_HOST}/storage/${product.img.replace(
                             / /g,
                             '-'
                           )}`}

@@ -8,7 +8,8 @@ import { Rating } from 'react-simple-star-rating'
 import Cookies from 'js-cookie'
 import Empty from '../Emptypage/Emptypage'
 function DetailProduct () {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const token = Cookies.get('authToken')
   const { id } = useParams()
   const [dataProduct, setDataProduct] = useState(null)
@@ -45,7 +46,7 @@ function DetailProduct () {
 
   const fetchDetailPD = async id => {
     try {
-      const data = await fetch(`http://127.0.0.1:8000/api/detailproduct/${id}`)
+      const data = await fetch(`${API_BASE_URL}/detailproduct/${id}`)
       const finalData = await data.json()
       if (finalData.success) {
         // console.log('Final Data Type:', typeof finalData.data)
@@ -149,7 +150,7 @@ function DetailProduct () {
               <div className='thumbImage grid gap-4 md:grid xs:flex xs:my-auto  '>
                 <div className='xl:h-[400px]  md:h-[350px] sm:h-[250px]  xs:h-[200px] flex justify-center '>
                   <img
-                    src={`http://localhost:8000/storage/${item.img}`}
+                    src={`${API_BASE}/storage/${item.img}`}
                     alt=''
                     className=''
                   />

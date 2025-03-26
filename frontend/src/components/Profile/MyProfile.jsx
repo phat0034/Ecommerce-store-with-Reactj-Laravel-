@@ -7,7 +7,7 @@ import SideBar from './SideBar'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 function MyProfile () {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
   const [isOpen, setIsOpen] = useState(false)
   const token = Cookies.get('authToken')
   const [userData, setUserData] = useState({

@@ -6,8 +6,8 @@ import Cookies from 'js-cookie'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import login from '../login/login'
 import { useLocation,Link  } from 'react-router-dom'
-const API_HOST = import.meta.env.VITE_API_HOST
-console.log(API_HOST)
+const API_HOST = import.meta.env.VITE_API_BASE_URL_API
+
 
 export const Header = () => {
   const navigate = useNavigate()
@@ -48,7 +48,7 @@ export const Header = () => {
   }
   const countItemsCart = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/countcart', {
+      const response = await fetch(`${API_HOST}/countcart`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

@@ -9,6 +9,8 @@ import Slider from 'react-slick'
 import './SliderHomePage.css'
 import Policy from '../Policy/PolicyPage'
 function HomePage () {
+  const API_HOST_API = import.meta.env.VITE_API_BASE_URL_API
+  const API_HOST = import.meta.env.VITE_API_BASE_URL_API
   const settings = {
     dots: false,
     infinite: false,
@@ -57,7 +59,7 @@ function HomePage () {
   const [newProduct, setNewProduct] = useState([])
   const fetchNewProduct = async () => {
     try {
-      await fetch('http://127.0.0.1:8000/api/getnewproduct', { method: 'post' })
+      await fetch(`${API_HOST_API}/getnewproduct`, { method: 'post' })
         .then(response => response.json())
         .then(data => {
           setNewProduct(data.data)
@@ -68,7 +70,7 @@ function HomePage () {
   }
   const fetchCatagory = async () => {
     try {
-      await fetch('http://127.0.0.1:8000/api/alltype')
+      await fetch(`${API_HOST_API}/alltype`)
         .then(response => response.json())
         .then(data => {
           setTypeData(data.data)
@@ -181,7 +183,7 @@ function HomePage () {
             {newProduct.map(product => (
               <div className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '>
                 <img
-                  src={`http://localhost:8000/storage/${product.img}`}
+                  src={`${API_BASE}/storage/${product.img}`}
                   alt=''
                   className='h-[300px] p-6'
                 />
@@ -265,7 +267,7 @@ function HomePage () {
           {newProduct.map(product => (
             <div className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '>
               <img
-                src={`http://localhost:8000/storage/${product.img}`}
+                src={`${API_BASE}/storage/${product.img}`}
                 alt=''
                 className='h-[300px] p-6'
               />
@@ -405,7 +407,7 @@ function HomePage () {
             {newProduct.map(product => (
               <div className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '>
                 <img
-                  src={`http://localhost:8000/storage/${product.img}`}
+                  src={`${API_HOST}/storage/${product.img}`}
                   alt=''
                   className='h-[300px] p-6'
                 />
@@ -489,7 +491,7 @@ function HomePage () {
           {newProduct.map(product => (
             <div className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '>
               <img
-                src={`http://localhost:8000/storage/${product.img}`}
+                src={`${API_HOST}/storage/${product.img}`}
                 alt=''
                 className='h-[300px] p-6'
               />

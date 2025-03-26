@@ -4,7 +4,7 @@ import { useLocation,Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 function SideBar () {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
   const locationRoute = useLocation()
   const token = Cookies.get('authToken')
   const sideBar = [

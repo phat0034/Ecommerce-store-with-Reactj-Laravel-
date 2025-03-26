@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 
 const Allproduct = () => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [currentPage, setCurrentPage] = useState(1)
@@ -15,7 +17,7 @@ const Allproduct = () => {
   const fetchData = async (type, page, sort) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/producttype?type=${type}&page=${page}&sort=${sort}`
+        `${API_BASE_URL}/producttype?type=${type}&page=${page}&sort=${sort}`
       )
       const fetchData = await response.json()
 
@@ -79,7 +81,7 @@ const Allproduct = () => {
                 <div className='flex justify-center'>
                   <div className='xl:h-[300px]  lg:h-[200px] sm:h-[150px]  xs:h-[120px] flex justify-center'>
                     <img
-                      src={`http://localhost:8000/storage/${product.img.replace(
+                      src={`${API_BASE}/storage/${product.img.replace(
                         / /g,
                         '-'
                       )}`}

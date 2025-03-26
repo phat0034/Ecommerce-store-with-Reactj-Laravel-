@@ -5,7 +5,8 @@ import Empty from '../Emptypage/Emptypage'
 
 
 function Cart () {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [dataCart, setdataCart] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
   const token = Cookies.get('authToken')
@@ -16,7 +17,7 @@ function Cart () {
       console.log(id)
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/deletecartid?id=${id}`,
+        `${API_BASE_URL}/deletecartid?id=${id}`,
         {
           method: 'DELETE',
           headers: {
@@ -79,7 +80,7 @@ function Cart () {
     //   item.product_id === id ? { ...item, quantity: newQuantity } : item
     // )
     // setdataCart(updateCart)
-    const response = await fetch(`http://127.0.0.1:8000/api/updatecart/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/updatecart/${id}`, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -132,7 +133,7 @@ function Cart () {
                         </p>
                         <Link to={`/detailproduct/${item.product_id}`}></Link>
                         <img
-                          src={`http://localhost:8000/storage/${item.img}`}
+                          src={`${API_BASE}/storage/${item.img}`}
                           alt='img'
                           className='w-24 mr-5 xl:w-24 xs:w-12 xs:m-0'
                         />
