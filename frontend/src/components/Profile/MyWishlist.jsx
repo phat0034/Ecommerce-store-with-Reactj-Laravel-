@@ -9,7 +9,7 @@ import 'reactjs-popup/dist/index.css'
 import Empty from '../Emptypage/Emptypage'
 function MyWishlist () {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
-  const API_BASE = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const token = Cookies.get('authToken')
   const [dataWL, setDataWL] = useState([])
   const [dataCart, setdataCart] = useState({})

@@ -9,7 +9,9 @@ import Slider from 'react-slick'
 import './SliderHomePage.css'
 import { useLocation, Link } from 'react-router-dom'
 import Policy from '../Policy/PolicyPage'
+import Cookies from 'js-cookie'
 function HomePage () {
+  const token = Cookies.get('authToken')
   const API_HOST_API = import.meta.env.VITE_API_BASE_URL_API
   const API_HOST = import.meta.env.VITE_API_BASE_URL
   const settings = {
@@ -78,6 +80,24 @@ function HomePage () {
         })
     } catch (error) {
       console.error('Lỗi khi fetch dữ liệu:', error)
+    }
+  }
+  const addtoWishlist = async id => {
+    if (token) {
+      try {
+        const response = await fetch(`${API_HOST_API}/addwl?id_product=${id}`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            accept: 'application/json'
+          }
+        })
+        const data = await response.json()
+        console.log(data.message)
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
   useEffect(() => {
@@ -201,9 +221,11 @@ function HomePage () {
                 </p>
                 <div className='absolute z-1 top-2 right-2'>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                    <Link
-                      to='/mywishlist'
-                      className='wishlist  absolute top-[25%] left-[20%]'
+                  <button
+                      onClick={() => {
+                        addtoWishlist(product.id)
+                      }}
+                      className='  absolute top-[25%] left-[20%]'
                     >
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -219,7 +241,7 @@ function HomePage () {
                           d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                         />
                       </svg>
-                    </Link>
+                    </button>
                   </div>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
                     <Link
@@ -288,25 +310,27 @@ function HomePage () {
               </p>
               <div className='absolute z-1 top-2 right-2'>
                 <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                  <Link
-                    to='/mywishlist'
-                    className='wishlist  absolute top-[25%] left-[20%]'
-                  >
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      strokeWidth='1.5'
-                      stroke='currentColor'
-                      className='size-4'
+                <button
+                      onClick={() => {
+                        addtoWishlist(product.id)
+                      }}
+                      className='  absolute top-[25%] left-[20%]'
                     >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
-                      />
-                    </svg>
-                  </Link>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth='1.5'
+                        stroke='currentColor'
+                        className='size-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
+                        />
+                      </svg>
+                    </button>
                 </div>
                 <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
                   <Link
@@ -429,9 +453,11 @@ function HomePage () {
                 </p>
                 <div className='absolute z-1 top-2 right-2'>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                    <Link
-                      to='/mywishlist'
-                      className='wishlist  absolute top-[25%] left-[20%]'
+                  <button
+                      onClick={() => {
+                        addtoWishlist(product.id)
+                      }}
+                      className='  absolute top-[25%] left-[20%]'
                     >
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -447,7 +473,7 @@ function HomePage () {
                           d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                         />
                       </svg>
-                    </Link>
+                    </button>
                   </div>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
                     <Link
@@ -516,25 +542,27 @@ function HomePage () {
               </p>
               <div className='absolute z-1 top-2 right-2'>
                 <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                  <Link
-                    to='/mywishlist'
-                    className='wishlist  absolute top-[25%] left-[20%]'
-                  >
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      strokeWidth='1.5'
-                      stroke='currentColor'
-                      className='size-4'
+                <button
+                      onClick={() => {
+                        addtoWishlist(product.id)
+                      }}
+                      className='  absolute top-[25%] left-[20%]'
                     >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
-                      />
-                    </svg>
-                  </Link>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth='1.5'
+                        stroke='currentColor'
+                        className='size-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
+                        />
+                      </svg>
+                    </button>
                 </div>
                 <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
                   <Link
@@ -605,7 +633,7 @@ function HomePage () {
                   Black and White version of the PS5 coming out on sale.
                 </p>
                 <Link
-                  to=''
+                  to='/catagory?c=Gaming'
                   className='lg:text-2xl underline decoration-gray-500 hover:decoration-white underline-offset-4 md:text-xl  xs:text-xs '
                 >
                   Shop Now
@@ -623,7 +651,7 @@ function HomePage () {
                   Featured woman collections that give you another vibe.
                 </p>
                 <Link
-                  to=''
+                  to='/catagory?c=Skincare'
                   className='lg:text-2xl underline decoration-gray-500 hover:decoration-white underline-offset-4 xs:text-xs '
                 >
                   Shop Now
@@ -640,7 +668,7 @@ function HomePage () {
                   Amazon wireless speakers
                 </p>
                 <Link
-                  to=''
+                   to='/catagory?c=Electronic'
                   className='text-2xl underline decoration-gray-500 hover:decoration-white underline-offset-4 md:text-xl xs:text-xs'
                 >
                   Shop Now
@@ -657,7 +685,7 @@ function HomePage () {
                   GUCCI INTENSE OUD EDP
                 </p>
                 <Link
-                  to=''
+                  to='/catagory?c=Makeup'
                   className='text-2xl underline decoration-gray-500 hover:decoration-white underline-offset-4 md:text-xl xs:text-xs '
                 >
                   Shop Now

@@ -23,7 +23,7 @@ const login = () => {
     })
     let dataJson = await responseData.json()
     if (dataJson.success) {
-      window.location.href = '/'
+      window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/'
       Cookies.set('authToken', dataJson.token, { expires: 1 })
       // window.history.replaceState({}, document.title, "/");
       alert('Login successful')
@@ -36,7 +36,7 @@ const login = () => {
 
   useEffect(() => {
     if (isLogin) {
-      window.location.href = '/'
+      window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/'
     }
   })
   return (

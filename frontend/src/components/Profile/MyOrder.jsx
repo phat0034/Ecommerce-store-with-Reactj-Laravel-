@@ -32,7 +32,7 @@ function MyOrder () {
     setFormReview({ ...formReview, rating: rate })
   }
   const fetchOrder = async () => {
-    const res = await fetch('${API_BASE_URL}/getorder', {
+    const res = await fetch(`${API_BASE_URL}/getorder`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'

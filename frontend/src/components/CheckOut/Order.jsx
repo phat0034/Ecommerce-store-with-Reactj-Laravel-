@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { assets } from '../../assets/assets'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import '../../../src/App.css'
 function Order () {
   const API_HOST = import.meta.env.VITE_API_BASE_URL_API
-  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL // Lấy từ .env
   const navigate = useNavigate()
   const token = Cookies.get('authToken')
   const [dataCart, setDataCart] = useState([])
@@ -119,7 +119,6 @@ function Order () {
         Authorization: `Bearer ${token}`
       }
     })
-    console.log(response)
 
     const data = await response.json()
     if (data.success) {
@@ -185,6 +184,7 @@ function Order () {
       address: orderData.address,
       phone_address: orderData.phone
     }))
+
     if (validateForm()) {
       try {
         const response = await fetch(`${API_HOST}/addorder`, {
@@ -205,7 +205,7 @@ function Order () {
             await addAddress()
           }
           await getNearOrder()
-          window.location.href = `/checkout/${idOrder}`
+          window.location.href = `/Ecommerce-store-with-Reactj-Laravel-/checkout/${idOrder}`
         } else {
           console.error(data.message)
         }
@@ -241,7 +241,6 @@ function Order () {
       email: item.email_address,
       phone: item.phone_address
     }))
-    console.log(orderData)
   }
   const [orderId, setOrderId] = useState(null)
 
@@ -250,18 +249,14 @@ function Order () {
     if (validateForm()) {
       console.log('✅ Form hợp lệ! Tiếp tục bước tiếp theo...')
       try {
-        const response = await fetch(
-          `${API_HOST}/paypal/create-order`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ total: totalPrice }) // Fixed test amount
-          }
-        )
+        const response = await fetch(`${API_HOST}/paypal/create-order`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ total: totalPrice }) // Fixed test amount
+        })
 
         const data = await response.json()
         setOrderId(data.id)
-        console.log(data.id)
 
         return data.id
       } catch (error) {
@@ -291,7 +286,6 @@ function Order () {
         )
 
         const paymentData = await response.json()
-        console.log('PayPal capture response:', paymentData)
 
         // Check if the payment was captured successfully
         if (paymentData.status === 'COMPLETED') {
@@ -304,7 +298,7 @@ function Order () {
 
           // Submit the order to your system
           await postdataOrder()
-          window.location.href = '/'
+
           // Show success message
           setMessage('Thanh toán thành công! Đơn hàng của bạn đang được xử lý.')
         } else {
@@ -322,7 +316,7 @@ function Order () {
   }
   useEffect(() => {
     if (idOrder !== null) {
-      window.location.href = `/checkout/${idOrder}`
+      window.location.href = `/Ecommerce-store-with-Reactj-Laravel-/checkout/${idOrder}`
       localStorage.setItem('temp_order', idOrder)
     }
   }, [idOrder]) // Chạy khi idOrder thay đổi
@@ -340,8 +334,6 @@ function Order () {
       const data = await response.json()
       if (data.success) {
         setCouponCode(Number(data.data))
-
-        console.log(couponCode)
       } else {
         console.log(data.message)
       }

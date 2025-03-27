@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 const SignUp = () => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API // Lấy từ .env
   const [dataForm, setDataForm] = useState({
     name: '',
     email: '',
@@ -27,22 +27,20 @@ const SignUp = () => {
 
     if (dataJson.success) {
       // window.location.replace('/')
-      console.log(response);
-      
+
       alert('Success')
       Cookies.set('authToken', dataJson.token, { expires: 1 })
-      window.location.href = '/'
+      window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/'
       // window.history.replaceState({}, document.title, "/");
     } else {
       alert(dataJson.message || 'Login failed with error: ' + dataJson.message)
     }
-    console.log(dataJson)
   }
   const isLogin = Cookies.get('authToken')
   const navigate = useNavigate()
   useEffect(() => {
     if (isLogin) {
-      window.location.href = '/'
+      window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/'
     }
   })
   return (

@@ -34,7 +34,7 @@ function CheckOut () {
       before:z-0 z-10'
             onClick={() => (
               localStorage.removeItem('temp_order'),
-              (window.location.href = `/`)
+              (window.location.href = `/Ecommerce-store-with-Reactj-Laravel-/`)
             )}
           >
             <span className='relative z-10'>Continue Shopping</span>
@@ -47,7 +47,7 @@ function CheckOut () {
       before:z-0 z-10'
             onClick={() => (
               localStorage.removeItem('temp_order'),
-              (window.location.href = `/myorder`)
+              (window.location.href = `/Ecommerce-store-with-Reactj-Laravel-/myorder`)
             )}
           >
             <span className='relative z-10'>Track Your Order</span>

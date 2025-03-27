@@ -29,7 +29,6 @@ const SearchProduct = () => {
       setDataProduct(null)
       return { ...prev, [type]: updateArray }
     })
-    console.log(filters)
   }
   const fetchData = async (search, page, sort) => {
     try {
