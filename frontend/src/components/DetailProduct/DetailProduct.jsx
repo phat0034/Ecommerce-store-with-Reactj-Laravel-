@@ -8,8 +8,8 @@ import { Rating } from 'react-simple-star-rating'
 import Cookies from 'js-cookie'
 import Empty from '../Emptypage/Emptypage'
 function DetailProduct () {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
-  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL // Lấy từ .env
   const token = Cookies.get('authToken')
   const { id } = useParams()
   const [dataProduct, setDataProduct] = useState(null)
@@ -62,17 +62,14 @@ function DetailProduct () {
   const fetchReview = async id => {
     try {
       setDataReview(null)
-      const response = await fetch(
-        `${API_BASE_URL}/getrwpd?id=${id}`,
-        {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}` // Nếu API yêu cầu login
-          }
+      const response = await fetch(`${API_BASE_URL}/getrwpd?id=${id}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` // Nếu API yêu cầu login
         }
-      )
+      })
       const finalData = await response.json()
       if (finalData.success) {
         // console.log('Final Data Type:', typeof finalData.data)
@@ -87,7 +84,6 @@ function DetailProduct () {
   }
   useEffect(() => {
     fetchDetailPD(id)
-    console.log(dataProduct)
   }, [id])
   if (!dataProduct) {
     return <div>Loading...</div>
@@ -121,17 +117,14 @@ function DetailProduct () {
   }
   const addtoWishlist = async id => {
     try {
-      const response = await fetch(
-        `${API_BASE_URL}/addwl?id_product=${id}`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            accept: 'application/json'
-          }
+      const response = await fetch(`${API_BASE_URL}/addwl?id_product=${id}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          accept: 'application/json'
         }
-      )
+      })
       const data = await response.json()
       console.log(data.message)
     } catch (error) {
@@ -144,9 +137,12 @@ function DetailProduct () {
         <div>
           <LinkItems />
         </div>
-        {dataProduct.map(item => (
+        {dataProduct.map((item, index) => (
           <>
-            <div className='grid grid-cols-2 gap-14 py-4 md:gap-14 xs:gap-4'>
+            <div
+              className='grid grid-cols-2 gap-14 py-4 md:gap-14 xs:gap-4'
+              key={index}
+            >
               <div className='thumbImage grid gap-4 md:grid xs:flex xs:my-auto  '>
                 <div className='xl:h-[400px]  md:h-[350px] sm:h-[250px]  xs:h-[200px] flex justify-center '>
                   <img
@@ -155,49 +151,6 @@ function DetailProduct () {
                     className=''
                   />
                 </div>
-                {/* detail img */}
-                {/* <div className='grid grid-cols-5 gap-4 md:grid xs:hidden '>
-                  <div className='border'>
-                    <img
-                      src={assets.leftps}
-                      alt=''
-                      srcset=''
-                      className='max-h-[150px]'
-                    />
-                  </div>
-                  <div className='border'>
-                    <img
-                      src={assets.leftps}
-                      alt=''
-                      srcset=''
-                      className='max-h-[150px]'
-                    />
-                  </div>{' '}
-                  <div className='border'>
-                    <img
-                      src={assets.leftps}
-                      alt=''
-                      srcset=''
-                      className='max-h-[150px]'
-                    />
-                  </div>{' '}
-                  <div className='border'>
-                    <img
-                      src={assets.leftps}
-                      alt=''
-                      srcset=''
-                      className='max-h-[150px]'
-                    />
-                  </div>{' '}
-                  <div className='border'>
-                    <img
-                      src={assets.leftps}
-                      alt=''
-                      srcset=''
-                      className='max-h-[150px]'
-                    />
-                  </div>
-                </div> */}
               </div>
               <div className='col-span-1  '>
                 <div className='inforProduct grid  gap-2 '>
@@ -239,8 +192,11 @@ function DetailProduct () {
                               ) : (
                                 <>
                                   {dataReview &&
-                                    dataReview.map(rv => (
-                                      <div className=' w-full  py-2'>
+                                    dataReview.map((rv, index) => (
+                                      <div
+                                        className=' w-full  py-2'
+                                        key={index}
+                                      >
                                         <div className=' bg-white shadow-lg rounded-lg p-6 m-0 border-2 border-gray-200'>
                                           {/* User Info */}
                                           <div className='flex items-center mb-2'>
@@ -332,7 +288,8 @@ function DetailProduct () {
                             <button
                               onClick={async () => {
                                 await addtoCart()
-                                window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/order'
+                                window.location.href =
+                                  '/Ecommerce-store-with-Reactj-Laravel-/order'
                               }}
                               className='w-full border text-lg px-32 py-4 rounded-lg hover:bg-black hover:text-white transition delay-75 duration-75 md:px-32 xs:px-8'
                             >

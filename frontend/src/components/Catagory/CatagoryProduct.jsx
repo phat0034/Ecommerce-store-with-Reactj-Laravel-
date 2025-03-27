@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
-
+import { useNavigate, useSearchParams, useParams, Link } from 'react-router-dom'
+import { assets } from '../../assets/assets'
+import Cookies from 'js-cookie'
 const Allproduct = () => {
+  const token = Cookies.get('authToken')
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API
-  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  // const API_BASE_URL = 'http://127.0.0.1:8000/api'
+  const API_BASE = import.meta.env.VITE_API_BASE_URL // Lấy từ .env
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [currentPage, setCurrentPage] = useState(1)
@@ -17,17 +20,36 @@ const Allproduct = () => {
   const fetchData = async (type, page, sort) => {
     try {
       const response = await fetch(
-        `${API_BASE_URL}/producttype?type=${type}&page=${page}&sort=${sort}`
+        `${API_BASE_URL}/producttype?type=${type}&page=${page}&sort=${sort}&p=12`
       )
       const fetchData = await response.json()
 
       if (fetchData.success) {
         setDataProduct(fetchData.data.data)
+
         setCurrentPage(fetchData.data.current_page)
         setLastPage(fetchData.data.last_page)
       }
     } catch (error) {
       console.log(error)
+    }
+  }
+  const addtoWishlist = async id => {
+    if (token) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/addwl?id_product=${id}`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            accept: 'application/json'
+          }
+        })
+        const data = await response.json()
+        console.log(data.message)
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
   const handleSortChange = e => {
@@ -67,9 +89,6 @@ const Allproduct = () => {
               onChange={handleSortChange}
               className='border rounded-md p-2 '
             >
-              <option value='0' selected>
-                Sort Product
-              </option>
               <option value='asc'>Low To High Price</option>
               <option value='desc'>High To Low Price</option>
               <option value='popular'>Most Popular</option>
@@ -77,7 +96,10 @@ const Allproduct = () => {
           </div>
           <div className='grid grid-cols-4 gap-4 my-4 md:grid-cols-4 sm:grid-cols-2  xs:grid-cols-2'>
             {dataProduct.map(product => (
-              <div className='cardProduct lg:w-auto md:h-full  h-auto relative border rounded-lg shadow-lg p-3 '>
+              <div
+                className='cardProduct lg:w-auto md:h-full  h-auto relative border rounded-lg shadow-lg p-3 '
+                key={product.id}
+              >
                 <div className='flex justify-center'>
                   <div className='xl:h-[300px]  lg:h-[200px] sm:h-[150px]  xs:h-[120px] flex justify-center'>
                     <img
@@ -90,12 +112,22 @@ const Allproduct = () => {
                     />
                   </div>
                 </div>
-                <p className='p-4 text-white rounded-md font-light bg-red-600 w-[65px] h-3 absolute flex items-center   top-2 left-2 z-10'>
-                  -40%
+                <p className='py-4 px-2 text-white rounded-md font-semibold bg-red-600 w-[fit] max-w-[85px] h-3 absolute flex items-center   top-2 left-2 z-1'>
+                  -
+                  {(
+                    ((product.price - product.saleprice) / product.price) *
+                    100
+                  ).toFixed(1)}
+                  %
                 </p>
-                <div className='absolute z-10 top-2 right-2'>
+                <div className='absolute z-1 top-2 right-2'>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                    <Link to='' className='  absolute top-[25%] left-[20%]'>
+                    <button
+                      onClick={() => {
+                        addtoWishlist(product.id)
+                      }}
+                      className='  absolute top-[25%] left-[20%]'
+                    >
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
@@ -110,7 +142,7 @@ const Allproduct = () => {
                           d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                         />
                       </svg>
-                    </Link>
+                    </button>
                   </div>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
                     <Link
@@ -152,7 +184,12 @@ const Allproduct = () => {
                     <span className='text-black '>{product.price}$</span>
                   )}
                 </p>
-                <p>Star Rating</p>
+                <p className='flex gap-2 text-[18px] font-medium'>
+                  <img src={assets.star} alt='' className='w-6' />
+                  {parseFloat(product.avg_rating).toFixed(1) == 0
+                    ? 'No ratings yet'
+                    : parseFloat(product.avg_rating).toFixed(1)}
+                </p>
               </div>
             ))}
           </div>
@@ -182,6 +219,7 @@ const Allproduct = () => {
                   currentPage === index ? 'bg-black text-white' : ''
                 }`}
                 onClick={() => handlePageChange(index)}
+                key={index}
               >
                 {index}
               </p>

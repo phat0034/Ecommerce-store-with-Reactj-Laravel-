@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams, useParams,Link } from 'react-router-dom'
+import { useNavigate, useSearchParams, useParams, Link } from 'react-router-dom'
 import { assets } from '../../assets/assets'
+import Cookies from 'js-cookie'
 
 const Allproduct = () => {
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
-  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
+  const token = Cookies.get('authToken')
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL // Lấy từ .env
+
   const navigate = useNavigate()
   const urlLink = window.location.href
   const [searchParams] = useSearchParams()
@@ -17,7 +20,6 @@ const Allproduct = () => {
     categories: [],
     brands: []
   })
-
   const numPage = []
   let getPage = parseInt(searchParams.get('page'))
   const [sortOrder, setSortorder] = useState('asc')
@@ -66,6 +68,24 @@ const Allproduct = () => {
       console.error(error)
     }
   }
+  const addtoWishlist = async id => {
+    if (token) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/addwl?id_product=${id}`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            accept: 'application/json'
+          }
+        })
+        const data = await response.json()
+        console.log(data.message)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
   useEffect(() => {
     if (getPage > lastPage) {
       navigate(`?page=${lastPage}`)
@@ -93,34 +113,6 @@ const Allproduct = () => {
     <>
       <div className='px-24 py-12 grid grid-cols-5 lg:px-12 lg:py-6 md:px-6 md:py-3 sm:px-3 sm:py-1  xs:px-3 xs:py-1 '>
         <div className='filterPlace  h-fit lg:px-4  border rounded-xl md:block sm:hidden xs:hidden '>
-          {/* <div className='priceFilter border-b-2 pb-3 '>
-            <h1 className='lg:text-2xl lg:font-semibold lg:my-3 '>Price</h1>
-            <div>
-              <ul className='grid gap-2 lg:text-xl'>
-                <li className='flex '>
-                  <input type='checkbox' className='mr-3' />
-                  <p>10$ </p>
-                </li>
-                <li className='flex '>
-                  <input type='checkbox' className='mr-3' />
-                  <p>20$</p>
-                </li>
-                <li className='flex '>
-                  <input type='checkbox' className='mr-3' />
-                  <p>30$</p>
-                </li>
-                <li className='flex '>
-                  <input type='checkbox' className='mr-3' />
-                  <p>40$</p>
-                </li>
-
-                <li className='flex '>
-                  <input type='checkbox' className='mr-3' />
-                  <p>50$ +</p>
-                </li>
-              </ul>
-            </div>
-          </div> */}
           <div className='typeFilter '>
             <h1 className='lg:text-2xl lg:font-semibold lg:my-3 '>
               Product Type
@@ -199,13 +191,21 @@ const Allproduct = () => {
                           className=''
                         />
                       </div>
-                      <p className='p-4 text-white rounded-md font-light bg-red-600 w-[65px] h-3 absolute flex items-center   top-2 left-2 z-1'>
-                        -40%
+                      <p className='py-4 px-2 text-white rounded-md font-semibold bg-red-600 w-[fit] max-w-[85px] h-3 absolute flex items-center   top-2 left-2 z-1'>
+                        -
+                        {(
+                          ((product.price - product.saleprice) /
+                            product.price) *
+                          100
+                        ).toFixed(1)}
+                        %
                       </p>
                       <div className='absolute z-1 top-2 right-2'>
                         <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                          <Link
-                            to=''
+                          <button
+                            onClick={() => {
+                              addtoWishlist(product.id)
+                            }}
                             className='  absolute top-[25%] left-[20%]'
                           >
                             <svg
@@ -222,7 +222,7 @@ const Allproduct = () => {
                                 d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                               />
                             </svg>
-                          </Link>
+                          </button>
                         </div>
                         <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
                           <Link
