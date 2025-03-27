@@ -4,10 +4,12 @@ import Popup from 'reactjs-popup'
 import '../../App.css'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 function OrderAdmin () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [orderData, setOrderData] = useState(false)
   const [detailOrder, setDetailOrder] = useState([])
   const fetchOrder = async () => {
-    const res = await fetch(`http://127.0.0.1:8000/api/getorder?admin=true`, {
+    const res = await fetch(`${API_BASE_URL}/getorder?admin=true`, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -24,7 +26,7 @@ function OrderAdmin () {
   const fetchDetailOrder = async id => {
     setDetailOrder(null)
     const res = await fetch(
-      `http://127.0.0.1:8000/api/getdetailorder?id_order=${id}`,
+      `${API_BASE_URL}/getdetailorder?id_order=${id}`,
       {
         headers: {
           'Content-Type': 'application/json'
@@ -42,7 +44,7 @@ function OrderAdmin () {
   const editStatus = async (iduser, status) => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/editstatus?id=${iduser}&status=${status}`,
+        `${API_BASE_URL}/editstatus?id=${iduser}&status=${status}`,
         {
           method: 'post'
         }

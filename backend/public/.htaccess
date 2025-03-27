@@ -5,6 +5,13 @@
 
     RewriteEngine On
 
+    # vừa thêm
+     # Cho phép truy cập storage
+     RewriteRule ^storage/(.*)$ /storage/$1 [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^storage/(.*)$ public/storage/$1 [L]
+    #-----
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

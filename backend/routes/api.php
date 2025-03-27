@@ -13,6 +13,7 @@ use App\Http\Controllers\PayPalController;
 use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -143,4 +144,18 @@ Route::get('/list-files', function () {
 });
 Route::get('/check-files', function () {
     return response()->json(File::allFiles(app_path('Models')));
+});
+Route::get('/upload-debug', function () {
+    return response()->json([
+        'base_path' => base_path(),
+        'app_path' => app_path(),
+        'storage_path' => storage_path(),
+        'public_path' => public_path(),
+        'full_uploads_path' => storage_path('app/public/uploads'),
+        'path_exists' => file_exists(storage_path('app/public/uploads')),
+        'is_dir' => is_dir(storage_path('app/public/uploads')),
+        'is_writable' => is_writable(storage_path('app/public/uploads')),
+        'permissions' => substr(sprintf('%o', fileperms(storage_path('app/public/uploads'))), -4),
+        'disk_config' => config('filesystems.disks.public')
+    ]);
 });

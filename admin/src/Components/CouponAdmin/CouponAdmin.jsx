@@ -5,6 +5,8 @@ import '../../App.css'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 
 function CouponAdmin () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [couponData, setCouponData] = useState([])
   const today = new Date().toISOString().split('T')[0]
   const [cpData, setCpData] = useState({
@@ -32,7 +34,7 @@ function CouponAdmin () {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/getcp`, {
+      const response = await fetch(`${API_BASE_URL}/getcp`, {
         method: 'Get'
       })
       const fetchData = await response.json()
@@ -47,7 +49,7 @@ function CouponAdmin () {
   }
   const addCoupon = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/addcp`, {
+      const response = await fetch(`${API_BASE_URL}/addcp`, {
         method: 'Post',
         headers: {
           'Content-Type': 'application/json'
@@ -79,7 +81,7 @@ function CouponAdmin () {
       formData.append('quantity', cpData.quantity)
       formData.append('expires_at', cpData.expires_at)
       const response = await fetch(
-        `http://127.0.0.1:8000/api/editcp?id=${id}`,
+        `${API_BASE_URL}/editcp?id=${id}`,
         {
           method: 'POST',
           headers: {
@@ -103,7 +105,7 @@ function CouponAdmin () {
   const removeCoupon = async id => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/deletecp?id=${id}`,
+        `${API_BASE_URL}/deletecp?id=${id}`,
         {
           method: 'DELETE'
         }
@@ -121,7 +123,7 @@ function CouponAdmin () {
   const findProduct = async value => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/findproduct?s=${value}`,
+        `${API_BASE_URL}/findproduct?s=${value}`,
         {
           method: 'GET'
         }

@@ -5,6 +5,8 @@ import '../../App.css'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 
 function Listproduct () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [allProducts, setAllProduct] = useState([])
   const [image, setImage] = useState(false)
   const [prodIdData, setprodIdData] = useState({})
@@ -17,7 +19,7 @@ function Listproduct () {
   const [query, setQuery] = useState('')
   let getPage = parseInt(searchParams.get('page'))
   // const fetchInfo = async () => {
-  //   const response = await fetch('http://127.0.0.1:8000/api/allproduct')
+  //   const response = await fetch('${API_BASE_URL}/allproduct')
   //   const data = await response.json() // Chuyển đổi thành JSON
   //   setAllProduct(data) // Cập nhật state với dữ liệu JSON
   //   console.log(data)
@@ -36,7 +38,7 @@ function Listproduct () {
   const fetchData = async page => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/allproductpage?page=${page}&p=100`,
+        `${API_BASE_URL}/allproductpage?page=${page}&p=100`,
         {
           method: 'Post'
         }
@@ -56,7 +58,7 @@ function Listproduct () {
   }
   const fetchInfo = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/allproduct')
+      const response = await fetch(`${API_BASE_URL}/allproduct`)
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)
       }
@@ -79,7 +81,7 @@ function Listproduct () {
       formData.append('idtype', prodIdData.idtype)
       formData.append('img', image)
       const response = await fetch(
-        `http://127.0.0.1:8000/api/editproduct?id=${id}`,
+        `${API_BASE_URL}/editproduct?id=${id}`,
         {
           method: 'POST',
           headers: {
@@ -102,7 +104,7 @@ function Listproduct () {
     }
   }
   const removeProduct = async id => {
-    const response = await fetch(`http://127.0.0.1:8000/api/delete?id=${id}`, {
+    const response = await fetch(`${API_BASE_URL}/delete?id=${id}`, {
       method: 'DELETE'
     })
 
@@ -116,7 +118,7 @@ function Listproduct () {
   const findProduct = async value => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/findproduct?s=${value}`,
+        `${API_BASE_URL}/findproduct?s=${value}`,
         {
           method: 'GET'
         }
@@ -131,7 +133,7 @@ function Listproduct () {
   }
   const [listType, setlistType] = useState([])
   const getType = async () => {
-    const dataType = await fetch('http://127.0.0.1:8000/api/alltype', {
+    const dataType = await fetch(`${API_BASE_URL}/alltype`, {
       method: 'GET'
     })
     const allType = await dataType.json()
@@ -227,7 +229,7 @@ function Listproduct () {
                       </th>
                       <td class='px-6 py-4'>
                         <img
-                          src={`http://127.0.0.1:8000/storage/${item.img}`}
+                          src={`${API_BASE}/storage/${item.img}`}
                           alt=''
                           className='w-20 h-20'
                         />

@@ -3,6 +3,8 @@ import { assets } from '../../../../frontend/src/assets/assets'
 import { useEffect } from 'react'
 
 function Addproduct () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [image, setImage] = useState(false)
   const [productDetails, setProductDetails] = useState({
     name: '',
@@ -27,7 +29,7 @@ function Addproduct () {
     formData.append('img', image)
     console.log(formData)
 
-    const responseData = await fetch(' http://127.0.0.1:8000/api/add', {
+    const responseData = await fetch(`${API_BASE_URL}/add`, {
       method: 'POST',
       headers: {
         Accept: 'application/json'
@@ -79,7 +81,7 @@ function Addproduct () {
         formData.append('saleprice', randSale)
         formData.append('type', productDetails.type)
         formData.append('img', image)
-        const responseData = await fetch('http://127.0.0.1:8000/api/add', {
+        const responseData = await fetch(`${API_BASE_URL}/add`, {
           method: 'POST',
           headers: {
             Accept: 'application/json'
@@ -121,7 +123,7 @@ function Addproduct () {
     setTypeproduct({ ...typeProduct, [e.target.name]: e.target.value })
   }
   const addTypeProduct = async () => {
-    const dataType = await fetch('http://127.0.0.1:8000/api/addtype', {
+    const dataType = await fetch(`${API_BASE_URL}/addtype`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -139,7 +141,7 @@ function Addproduct () {
   }
   const [listType, setlistType] = useState([])
   const getType = async () => {
-    const dataType = await fetch('http://127.0.0.1:8000/api/alltype', {
+    const dataType = await fetch(`${API_BASE_URL}/alltype`, {
       method: 'GET'
     })
     const allType = await dataType.json()

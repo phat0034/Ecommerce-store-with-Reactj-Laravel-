@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\user;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Routing\Controller; // Đảm bảo import lớp này
@@ -48,7 +48,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|string'
         ]);
-        $user  = user::where('email', $req->email)->first();  // S
+        $user  = User::where('email', $req->email)->first();  // S
         if (!$user || !Hash::check($req->password, $user->password)) {
             return response()->json([
                 'success' => false,

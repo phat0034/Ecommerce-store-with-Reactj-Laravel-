@@ -4,12 +4,14 @@ import Popup from 'reactjs-popup'
 import '../../App.css'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 function ReviewAdmin () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [dataReview, setDataReview] = useState([])
   const [query, setQuery] = useState('')
   const findReview = async value => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/findreview?s=${value}`,
+        `${API_BASE_URL}/findreview?s=${value}`,
         {
           method: 'GET'
         }
@@ -27,7 +29,7 @@ function ReviewAdmin () {
   }
   const fetchDataReview = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/getallreview`, {
+      const res = await fetch(`${API_BASE_URL}/getallreview`, {
         method: 'GET'
       })
 
@@ -108,7 +110,7 @@ function ReviewAdmin () {
                             <div className='flex'>
                               <div className='w-12'>
                                 <img
-                                  src={`http://localhost:8000/storage/${item.img}`}
+                                  src={`${API_BASE}/storage/${item.img}`}
                                   alt=''
                                 />
                               </div>

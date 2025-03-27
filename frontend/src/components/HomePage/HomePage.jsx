@@ -10,7 +10,7 @@ import './SliderHomePage.css'
 import Policy from '../Policy/PolicyPage'
 function HomePage () {
   const API_HOST_API = import.meta.env.VITE_API_BASE_URL_API
-  const API_HOST = import.meta.env.VITE_API_BASE_URL_API
+  const API_HOST = import.meta.env.VITE_API_BASE_URL
   const settings = {
     dots: false,
     infinite: false,

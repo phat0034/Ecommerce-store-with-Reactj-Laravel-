@@ -4,12 +4,14 @@ import Popup from 'reactjs-popup'
 import '../../App.css'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 function UserAdmin () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [dataUser, setDataUser] = useState([])
   const [query, setQuery] = useState('')
   const [addressData, setAdressData] = useState(false)
   const fetchUserData = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/getuseradmin', {
+      const res = await fetch('${API_BASE_URL}/getuseradmin', {
         method: 'GET'
       })
       const data = await res.json()
@@ -26,7 +28,7 @@ function UserAdmin () {
   const setRole = async (iduser, role) => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/setrole?iduser=${iduser}&role=${role}`,
+        `${API_BASE_URL}/setrole?iduser=${iduser}&role=${role}`,
         {
           method: 'POST'
         }
@@ -43,7 +45,7 @@ function UserAdmin () {
   }
   const findUser = async value => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/finduser?s=${value}`, {
+      const res = await fetch(`${API_BASE_URL}/finduser?s=${value}`, {
         method: 'GET'
       })
       const data = await res.json()
@@ -58,7 +60,7 @@ function UserAdmin () {
     setAdressData(null)
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/showaddressadmin?id=${id}`,
+        `${API_BASE_URL}/showaddressadmin?id=${id}`,
         {
           method: 'GET',
           headers: {

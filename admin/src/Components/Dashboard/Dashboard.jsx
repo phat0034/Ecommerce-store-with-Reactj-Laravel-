@@ -21,6 +21,8 @@ import Popup from 'reactjs-popup'
 import '../../App.css'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 export default function Dashboard () {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE = import.meta.env.VITE_API_BASE_URL; // Lấy từ .env
   const [typeSold, setTypeSold] = useState([])
   const [recentlyOrder, setRecentlyOrder] = useState([])
   const [dataDashboard, setDataDashboard] = useState([
@@ -60,7 +62,7 @@ export default function Dashboard () {
   }
   const calRevenue = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/calrevenue', {
+      const res = await fetch(`${API_BASE}/calrevenue`, {
         method: 'GET'
       })
       const data = await res.json()
@@ -75,7 +77,7 @@ export default function Dashboard () {
   }
   const countTypeSold = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/typesold', {
+      const res = await fetch(`${API_BASE}/typesold`, {
         method: 'GET'
       })
       const data = await res.json()
@@ -92,7 +94,7 @@ export default function Dashboard () {
   }
   const countUsers = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/countuser', {
+      const res = await fetch(`${API_BASE}/countuser`, {
         method: 'GET'
       })
       const data = await res.json()
@@ -105,7 +107,7 @@ export default function Dashboard () {
   const revenueOfYear = async () => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/revenuedayyear?d=year`,
+        `${API_BASE}/revenuedayyear?d=year`,
         {
           method: 'GET'
         }
@@ -119,7 +121,7 @@ export default function Dashboard () {
   const revenueOfDay = async () => {
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/api/revenuedayyear?d=day`,
+        `${API_BASE}/revenuedayyear?d=day`,
         {
           method: 'GET'
         }
@@ -132,7 +134,7 @@ export default function Dashboard () {
   }
   const countOrder = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/countsold`, {
+      const res = await fetch(`${API_BASE}/countsold`, {
         method: 'GET'
       })
       const data = await res.json()
@@ -143,7 +145,7 @@ export default function Dashboard () {
   }
   const recentlyOrders = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/checkrencently`, {
+      const res = await fetch(`${API_BASE}/checkrencently`, {
         method: 'GET'
       })
       const data = await res.json()
