@@ -64,10 +64,7 @@ export const routes = [
     path: '/signup',
     page: SignUp
   },
-  {
-    path: '/wishlist',
-    page: Wishlist
-  },
+
   {
     path: '/cart',
     page: Cart

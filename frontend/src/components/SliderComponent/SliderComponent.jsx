@@ -11,9 +11,8 @@ const SliderComponent = ({ arrImages }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    dotsClass: 'slick-dots custom-dots', // Add this line,
-    // nextArrow: <SampleNextArrow />,
-    // prevArrow: <SamplePrevArrow />
+    dotsClass: 'slick-dots custom-dots',
+
     appendDots: dots => (
       <div
         style={{
@@ -51,8 +50,8 @@ const SliderComponent = ({ arrImages }) => {
   }
   return (
     <Slider {...settings}>
-      {arrImages.map(img => (
-        <img src={img} alt='slider' className='' />
+      {arrImages.map((img,index) => (
+        <img src={img} alt='slider' className='' key={index} />
       ))}
     </Slider>
   )

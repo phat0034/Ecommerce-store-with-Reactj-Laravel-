@@ -19,8 +19,8 @@ function App () {
       <Header />
 
       <Routes>
-        {routes.map(route => (
-          <Route key={route.path} path={route.path} element={<route.page />} />
+        {routes.map((route,index) => (
+          <Route key={index} path={route.path} element={<route.page />} />
         ))}
       </Routes>
 

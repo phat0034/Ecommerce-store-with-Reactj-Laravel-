@@ -5,9 +5,8 @@ import { motion } from 'framer-motion'
 import Cookies from 'js-cookie'
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import login from '../login/login'
-import { useLocation,Link  } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 const API_HOST = import.meta.env.VITE_API_BASE_URL_API
-
 
 export const Header = () => {
   const navigate = useNavigate()
@@ -47,22 +46,24 @@ export const Header = () => {
     setKeywordSearch(e.target.value)
   }
   const countItemsCart = async () => {
-    try {
-      const response = await fetch(`${API_HOST}/countcart`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+    if (token) {
+      try {
+        const response = await fetch(`${API_HOST}/countcart`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        const data = await response.json()
+        if (data.success) {
+          setCountCart(parseInt(data.data))
+        } else {
+          console.error(data.message)
         }
-      })
-      const data = await response.json()
-      if (data.success) {
-        setCountCart(parseInt(data.data))
-      } else {
-        console.error(data.message)
+      } catch (error) {
+        console.error(error)
       }
-    } catch (error) {
-      console.error(error)
     }
   }
   useEffect(() => {

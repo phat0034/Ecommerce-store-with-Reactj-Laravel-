@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 import './SliderHomePage.css'
+import { useLocation, Link } from 'react-router-dom'
 import Policy from '../Policy/PolicyPage'
 function HomePage () {
   const API_HOST_API = import.meta.env.VITE_API_BASE_URL_API
@@ -89,24 +90,18 @@ function HomePage () {
       <div className='banner  grid grid-cols-12  mb-32 xs:hidden xs:mb-5 md:grid md:mb-12 lg:mb-32 lg:grid '>
         <div className='catagory col-span-2 border-r text-[15px] xs:flex '>
           <ul>
-            <li className='mt-12 mb-4 md:mt-4'>
-              <a href=''>Woman's Fashion</a>
-            </li>
-            <li className='mb-4'>
-              <a href=''>Electronics</a>
-            </li>
-            <li className='mb-4'>
-              <a href=''>Men's Fashion</a>
-            </li>
-            <li className='mb-4'>
-              <a href=''>Home & Lifestyle</a>
-            </li>
-            <li className='mb-4'>
-              <a href=''>Sports & Outdoor</a>
-            </li>
-            <li className='mb-4'>
-              <a href=''>Medicine</a>
-            </li>
+            {typeData.map((type, index) => (
+              <>
+                <li
+                  className='mt-12 mb-4 md:mt-4 text-lg '
+                  key={type.id || index}
+                >
+                  <Link to={`/catagory?c=${type.name}`} className='   '>
+                    {type.name}
+                  </Link>
+                </li>
+              </>
+            ))}
           </ul>
         </div>
         <div className='sliderProduct col-span-10 pt-12 pl-12 md:pt-4 md:pl-4'>
@@ -122,7 +117,13 @@ function HomePage () {
           />
         </div>
         <Slider {...confMobileCatagory}>
-          <div className='text-center '>
+          {typeData.map((type, index) => (
+            <div key={`mobile-category-${type.name}`} className='text-center'>
+              <Link to={`/catagory?c=${type.name}`}>{type.name}</Link>
+            </div>
+          ))}
+
+          {/* <div className=' '>
             {' '}
             <a href=''>Woman's Fashion</a>
           </div>
@@ -141,7 +142,7 @@ function HomePage () {
           <div className='text-center'>
             {' '}
             <a href=''>Medicine</a>
-          </div>
+          </div> */}
         </Slider>
       </div>
       <div className='forMobile slider-container xs:block md:hidden lg:hidden'></div>
@@ -180,8 +181,11 @@ function HomePage () {
         </div>
         <div className='slider-container md:block lg:hidden'>
           <Slider {...settings}>
-            {newProduct.map(product => (
-              <div className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '>
+            {newProduct.map((product, index) => (
+              <div
+                className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '
+                key={product.id}
+              >
                 <img
                   src={`${API_HOST}/storage/${product.img}`}
                   alt=''
@@ -197,8 +201,8 @@ function HomePage () {
                 </p>
                 <div className='absolute z-1 top-2 right-2'>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                    <a
-                      href='/wishlist'
+                    <Link
+                      to='/mywishlist'
                       className='wishlist  absolute top-[25%] left-[20%]'
                     >
                       <svg
@@ -215,11 +219,11 @@ function HomePage () {
                           d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                         />
                       </svg>
-                    </a>
+                    </Link>
                   </div>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                    <a
-                      href={`/detailproduct/${product.id}`}
+                    <Link
+                      to={`/detailproduct/${product.id}`}
                       className='view  absolute top-[25%] left-[20%]'
                     >
                       <svg
@@ -241,7 +245,7 @@ function HomePage () {
                           d='M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
                         />
                       </svg>
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <h3 className='text-[20px] font-bold h-[60px] max-h-[60px]'>
@@ -264,10 +268,13 @@ function HomePage () {
           </Slider>
         </div>
         <div className='displayProduct flex space-x-4 xs:hidden md:hidden lg:flex'>
-          {newProduct.map(product => (
-            <div className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '>
+          {newProduct.map((product, index) => (
+            <div
+              className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '
+              key={product.id}
+            >
               <img
-                src={`${API_BASE}/storage/${product.img}`}
+                src={`${API_HOST}/storage/${product.img}`}
                 alt=''
                 className='h-[300px] p-6'
               />
@@ -281,8 +288,8 @@ function HomePage () {
               </p>
               <div className='absolute z-1 top-2 right-2'>
                 <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                  <a
-                    href='/wishlist'
+                  <Link
+                    to='/mywishlist'
                     className='wishlist  absolute top-[25%] left-[20%]'
                   >
                     <svg
@@ -299,11 +306,11 @@ function HomePage () {
                         d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
                 <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                  <a
-                    href={`/detailproduct/${product.id}`}
+                  <Link
+                    to={`/detailproduct/${product.id}`}
                     className='view  absolute top-[25%] left-[20%]'
                   >
                     <svg
@@ -325,7 +332,7 @@ function HomePage () {
                         d='M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <h3 className='text-[20px] font-bold h-[60px] max-h-[60px]'>
@@ -347,12 +354,12 @@ function HomePage () {
           ))}
         </div>
         <div className='moreProduct  text-center w-full my-20 md:my-10'>
-          <a
-            href='/allproduct'
+          <Link
+            to='/allproduct'
             className=' p-4 bg-red-500  rounded-md  text-white'
           >
             View All Products
-          </a>
+          </Link>
         </div>
         <hr className='hr  border-[#7e7e7e]'></hr>
       </div>
@@ -369,18 +376,16 @@ function HomePage () {
           {typeData.map(
             (type, index) =>
               index < 6 && (
-                <>
-                  {' '}
-                  <a
-                    href={`/catagory?c=${type.name}`}
-                    className='grid place-items-center  h-[200px] w-[200px] border-2  rounded-md mr-4 xs:w-full xs:h-[150px] md:mr-0 md:h-56 md:w-full   '
-                  >
-                    <div className=' text-[25px]  text-center'>
-                      <img src={type} alt='' className='w-12 m-auto' />
-                      <p className='mt-2 '>{type.name}</p>
-                    </div>
-                  </a>
-                </>
+                <Link
+                  key={`category-${type.name}`}
+                  to={`/catagory?c=${type.name}`}
+                  className='grid place-items-center h-[200px] w-[200px] border-2 rounded-md mr-4 xs:w-full xs:h-[150px] md:mr-0 md:h-56 md:w-full'
+                >
+                  <div className='text-[25px] text-center'>
+                    <img src={type} alt='' className='w-12 m-auto' />
+                    <p className='mt-2'>{type.name}</p>
+                  </div>
+                </Link>
               )
           )}
         </div>
@@ -395,17 +400,20 @@ function HomePage () {
           <h1 className='col-span-3 font-bold text-4xl xs:col-span-6 xs:flex xs:my-auto xs:text-lg md:text-2xl md:col-span-4 md:flex md:my-auto lg:text-4xl'>
             Best Selling Products
           </h1>
-          <a
-            href='/allproduct'
+          <Link
+            to='/allproduct'
             className='col-end-13 col-span-1 text-center p-4 bg-red-500 text-white  rounded-md xs:p-2 xs:col-span-3 xs:col-start-10 md:col-start-11 '
           >
             View All
-          </a>
+          </Link>
         </div>
         <div className='slider-container md:block lg:hidden'>
           <Slider {...settings}>
-            {newProduct.map(product => (
-              <div className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '>
+            {newProduct.map((product, index) => (
+              <div
+                className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '
+                key={product.id}
+              >
                 <img
                   src={`${API_HOST}/storage/${product.img}`}
                   alt=''
@@ -421,8 +429,8 @@ function HomePage () {
                 </p>
                 <div className='absolute z-1 top-2 right-2'>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                    <a
-                      href='/wishlist'
+                    <Link
+                      to='/mywishlist'
                       className='wishlist  absolute top-[25%] left-[20%]'
                     >
                       <svg
@@ -439,11 +447,11 @@ function HomePage () {
                           d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                         />
                       </svg>
-                    </a>
+                    </Link>
                   </div>
                   <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                    <a
-                      href={`/detailproduct/${product.id}`}
+                    <Link
+                      to={`/detailproduct/${product.id}`}
                       className='view  absolute top-[25%] left-[20%]'
                     >
                       <svg
@@ -465,7 +473,7 @@ function HomePage () {
                           d='M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
                         />
                       </svg>
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <h3 className='text-[20px] font-bold h-[60px] max-h-[60px]'>
@@ -488,8 +496,11 @@ function HomePage () {
           </Slider>
         </div>
         <div className='displayProduct flex space-x-4 xs:hidden md:hidden lg:flex lg:my-10'>
-          {newProduct.map(product => (
-            <div className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '>
+          {newProduct.map((product, index) => (
+            <div
+              className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '
+              key={product.id}
+            >
               <img
                 src={`${API_HOST}/storage/${product.img}`}
                 alt=''
@@ -505,8 +516,8 @@ function HomePage () {
               </p>
               <div className='absolute z-1 top-2 right-2'>
                 <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                  <a
-                    href='/wishlist'
+                  <Link
+                    to='/mywishlist'
                     className='wishlist  absolute top-[25%] left-[20%]'
                   >
                     <svg
@@ -523,11 +534,11 @@ function HomePage () {
                         d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
                 <div className='bg-slate-300 rounded-full  w-7 h-7  relative mb-3'>
-                  <a
-                    href={`/detailproduct/${product.id}`}
+                  <Link
+                    to={`/detailproduct/${product.id}`}
                     className='view  absolute top-[25%] left-[20%]'
                   >
                     <svg
@@ -549,7 +560,7 @@ function HomePage () {
                         d='M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <h3 className='text-[20px] font-bold h-[60px] max-h-[60px]'>
@@ -593,12 +604,12 @@ function HomePage () {
                 <p className='font-extralight  lg:text-2xl lg:w-2/3 md:text-xl  xs:text-[10px] '>
                   Black and White version of the PS5 coming out on sale.
                 </p>
-                <a
-                  href=''
+                <Link
+                  to=''
                   className='lg:text-2xl underline decoration-gray-500 hover:decoration-white underline-offset-4 md:text-xl  xs:text-xs '
                 >
                   Shop Now
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -611,12 +622,12 @@ function HomePage () {
                 <p className='font-extralight  lg:text-2xl w-2/3  md:text-base  xs:text-[8px]'>
                   Featured woman collections that give you another vibe.
                 </p>
-                <a
-                  href=''
+                <Link
+                  to=''
                   className='lg:text-2xl underline decoration-gray-500 hover:decoration-white underline-offset-4 xs:text-xs '
                 >
                   Shop Now
-                </a>
+                </Link>
               </div>
             </div>
             <div className='row-span-1 col-span-3 bg-black relative '>
@@ -628,12 +639,12 @@ function HomePage () {
                 <p className='font-extralight  lg:text-xl md:text-xs xs:text-[10px]'>
                   Amazon wireless speakers
                 </p>
-                <a
-                  href=''
+                <Link
+                  to=''
                   className='text-2xl underline decoration-gray-500 hover:decoration-white underline-offset-4 md:text-xl xs:text-xs'
                 >
                   Shop Now
-                </a>
+                </Link>
               </div>
             </div>
             <div className='row-span-1 col-span-3 bg-black relative '>
@@ -645,12 +656,12 @@ function HomePage () {
                 <p className='font-extralight  lg:text-xl md:text-xs xs:text-[10px]'>
                   GUCCI INTENSE OUD EDP
                 </p>
-                <a
-                  href=''
+                <Link
+                  to=''
                   className='text-2xl underline decoration-gray-500 hover:decoration-white underline-offset-4 md:text-xl xs:text-xs '
                 >
                   Shop Now
-                </a>
+                </Link>
               </div>
             </div>
           </div>
