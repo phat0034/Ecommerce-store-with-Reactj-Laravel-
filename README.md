@@ -4,6 +4,10 @@
 #### Backend: Laravel 11
 #### Database: MySQL
 #### Automatic Table & Data Generation Laravel Migrations & Seeders
+## Demo
+
+##### Frontend: https://phat0034.github.io/Ecommerce-store-with-Reactj-Laravel-/
+##### Admin Page: https://phat0034.github.io/Admin-Page-TechStore/
 
 ## ✨ Core Features
 #### 🛍️ Product Features
