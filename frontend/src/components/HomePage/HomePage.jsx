@@ -183,7 +183,7 @@ function HomePage () {
             {newProduct.map(product => (
               <div className='cardProduct w-[25rem] md:h-full  h-auto mr-6 relative '>
                 <img
-                  src={`${API_BASE}/storage/${product.img}`}
+                  src={`${API_HOST}/storage/${product.img}`}
                   alt=''
                   className='h-[300px] p-6'
                 />
