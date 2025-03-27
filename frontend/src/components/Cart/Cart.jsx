@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { assets } from '../../assets/assets'
 import Cookies from 'js-cookie'
 import Empty from '../Emptypage/Emptypage'
-
+import { useNavigate,Link } from 'react-router-dom'
 
 function Cart () {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
