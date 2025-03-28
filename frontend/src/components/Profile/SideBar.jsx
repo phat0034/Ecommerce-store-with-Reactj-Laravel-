@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { assets } from '../../assets/assets'
-import { useLocation,Link } from 'react-router-dom'
+import { useLocation,Link,useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 function SideBar () {
+  const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
   const locationRoute = useLocation()
   const token = Cookies.get('authToken')
@@ -62,7 +63,7 @@ function SideBar () {
     fetchUserInfor()
   },[])
   if (!token) {
-    window.location.href = '/'
+    navigate("/")
   }
 
   return (

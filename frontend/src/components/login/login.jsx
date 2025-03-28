@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { assets } from '../../assets/assets'
 import Cookies from 'js-cookie'
-
+import { useNavigate,Link } from 'react-router-dom'
 const login = () => {
+  const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
   const [dataForm, setDataForm] = useState({
     username: '',
@@ -23,7 +24,7 @@ const login = () => {
     })
     let dataJson = await responseData.json()
     if (dataJson.success) {
-      window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/'
+      navigate("/")
       Cookies.set('authToken', dataJson.token, { expires: 1 })
       // window.history.replaceState({}, document.title, "/");
       alert('Login successful')
@@ -36,7 +37,7 @@ const login = () => {
 
   useEffect(() => {
     if (isLogin) {
-      window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/'
+      navigate("/")
     }
   })
   return (

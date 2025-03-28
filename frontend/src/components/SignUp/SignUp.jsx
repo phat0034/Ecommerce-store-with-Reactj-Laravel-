@@ -24,14 +24,10 @@ const SignUp = () => {
       body: JSON.stringify(dataForm)
     })
     const dataJson = await response.json()
-
     if (dataJson.success) {
-      // window.location.replace('/')
-
       alert('Success')
       Cookies.set('authToken', dataJson.token, { expires: 1 })
-      window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/'
-      // window.history.replaceState({}, document.title, "/");
+      navigate('/')
     } else {
       alert(dataJson.message || 'Login failed with error: ' + dataJson.message)
     }
@@ -40,7 +36,7 @@ const SignUp = () => {
   const navigate = useNavigate()
   useEffect(() => {
     if (isLogin) {
-      window.location.href = '/Ecommerce-store-with-Reactj-Laravel-/'
+      navigate('/')
     }
   })
   return (

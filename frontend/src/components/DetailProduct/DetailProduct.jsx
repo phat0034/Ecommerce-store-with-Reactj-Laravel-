@@ -1,13 +1,19 @@
 import React from 'react'
 import { assets } from '../../assets/assets'
 import LinkItems from '../linkItems/linkItems'
-import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
+import {
+  useNavigate,
+  useSearchParams,
+  useParams,
+  useNavigation
+} from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import Popup from 'reactjs-popup'
 import { Rating } from 'react-simple-star-rating'
 import Cookies from 'js-cookie'
 import Empty from '../Emptypage/Emptypage'
 function DetailProduct () {
+  const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API // Lấy từ .env
   const API_BASE = import.meta.env.VITE_API_BASE_URL // Lấy từ .env
   const token = Cookies.get('authToken')
@@ -97,7 +103,7 @@ function DetailProduct () {
   const addtoCart = async () => {
     if (!token) {
       alert('U must to login')
-      window.location.href = '/login'
+      navigate('/login')
     } else {
       try {
         const response = await fetch(`${API_BASE_URL}/addcart`, {
@@ -288,8 +294,7 @@ function DetailProduct () {
                             <button
                               onClick={async () => {
                                 await addtoCart()
-                                window.location.href =
-                                  '/Ecommerce-store-with-Reactj-Laravel-/order'
+                                navigate('/order')
                               }}
                               className='w-full border text-lg px-32 py-4 rounded-lg hover:bg-black hover:text-white transition delay-75 duration-75 md:px-32 xs:px-8'
                             >

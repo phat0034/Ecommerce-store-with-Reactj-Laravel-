@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { HashRouter,BrowserRouter } from 'react-router-dom'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/Ecommerce-store-with-Reactj-Laravel-/">
+    <BrowserRouter basename="/">
       <App />
     </BrowserRouter>
   </React.StrictMode>

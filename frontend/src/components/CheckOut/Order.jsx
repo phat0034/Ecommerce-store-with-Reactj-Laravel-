@@ -205,7 +205,7 @@ function Order () {
             await addAddress()
           }
           await getNearOrder()
-          window.location.href = `/Ecommerce-store-with-Reactj-Laravel-/checkout/${idOrder}`
+          navigate(`/checkout/${idOrder}`) 
         } else {
           console.error(data.message)
         }
@@ -316,7 +316,7 @@ function Order () {
   }
   useEffect(() => {
     if (idOrder !== null) {
-      window.location.href = `/Ecommerce-store-with-Reactj-Laravel-/checkout/${idOrder}`
+      navigate(`/Ecommerce-store-with-Reactj-Laravel-/checkout/${idOrder}`) 
       localStorage.setItem('temp_order', idOrder)
     }
   }, [idOrder]) // Chạy khi idOrder thay đổi

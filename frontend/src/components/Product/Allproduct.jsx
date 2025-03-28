@@ -9,7 +9,7 @@ const Allproduct = () => {
   const API_BASE = import.meta.env.VITE_API_BASE_URL // Lấy từ .env
 
   const navigate = useNavigate()
-  const urlLink = window.location.href
+
   const [searchParams] = useSearchParams()
   const [currentPage, setCurrentPage] = useState(1)
   const [lastPage, setLastPage] = useState()

@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { assets } from '../../assets/assets'
 import { useParams } from 'react-router'
-
+import { useNavigate,Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 function CheckOut () {
+  const navigate = useNavigate()
   const { id } = useParams()
   const temp_id = localStorage.getItem('temp_order')
   if (!temp_id || temp_id !== id) {
-    window.location.href = '/'
+    navigate('/')
   }
   return (
     <>
@@ -34,7 +35,7 @@ function CheckOut () {
       before:z-0 z-10'
             onClick={() => (
               localStorage.removeItem('temp_order'),
-              (window.location.href = `/Ecommerce-store-with-Reactj-Laravel-/`)
+              navigate('/')
             )}
           >
             <span className='relative z-10'>Continue Shopping</span>
@@ -47,7 +48,8 @@ function CheckOut () {
       before:z-0 z-10'
             onClick={() => (
               localStorage.removeItem('temp_order'),
-              (window.location.href = `/Ecommerce-store-with-Reactj-Laravel-/myorder`)
+              navigate('/myorder')
+           
             )}
           >
             <span className='relative z-10'>Track Your Order</span>

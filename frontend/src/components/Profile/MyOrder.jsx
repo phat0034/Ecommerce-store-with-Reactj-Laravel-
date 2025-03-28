@@ -10,7 +10,9 @@ import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 
 import Empty from '../Emptypage/Emptypage'
+
 function MyOrder () {
+  const navigate = useNavigate()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
   const token = Cookies.get('authToken')
   const [orderData, setOrderData] = useState([])
@@ -73,7 +75,7 @@ function MyOrder () {
     } catch (error) {
       console.error(error)
     }
-    window.location.href = '/myorder'
+    navigate("/myorder")
   }
   const checkReview = async idpd => {
     setIsReview(false)

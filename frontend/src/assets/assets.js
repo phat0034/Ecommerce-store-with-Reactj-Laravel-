@@ -35,8 +35,10 @@ import star from './myprofile/star-svgrepo-com.svg'
 import rightarrow from './myprofile/right-arrow-svgrepo-com (1).svg'
 import leftarrow from './myprofile/right-arrow-svgrepo-com (2).svg'
 import paypal from './payment/paypal.webp'
+import logo from './about/image-removebg-preview.png'
 export const assets = {
   uploadimg,
+  logo,
   paypal,
   star,
   leftarrow,
