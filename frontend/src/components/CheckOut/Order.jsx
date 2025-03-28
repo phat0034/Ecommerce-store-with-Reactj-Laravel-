@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { assets } from '../../assets/assets'
-import { useNavigate,Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import '../../../src/App.css'
@@ -199,13 +199,16 @@ function Order () {
 
         const data = await response.json()
         if (data.success) {
-          removeallCart()
+          // removeallCart()
           // ✅ Nếu isChecked == true thì gọi addAddress()
           if (isChecked) {
             await addAddress()
           }
-          await getNearOrder()
-          navigate(`/checkout/${idOrder}`) 
+          await setIdOrder(data.id)
+
+          // console.log(data);
+
+          navigate(`/checkout/${data.id}`)
         } else {
           console.error(data.message)
         }
@@ -316,7 +319,7 @@ function Order () {
   }
   useEffect(() => {
     if (idOrder !== null) {
-      navigate(`/Ecommerce-store-with-Reactj-Laravel-/checkout/${idOrder}`) 
+      // navigate(`/checkout/${idOrder}`)
       localStorage.setItem('temp_order', idOrder)
     }
   }, [idOrder]) // Chạy khi idOrder thay đổi
