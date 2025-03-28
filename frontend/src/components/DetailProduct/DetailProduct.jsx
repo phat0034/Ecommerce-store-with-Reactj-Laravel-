@@ -294,7 +294,7 @@ function DetailProduct () {
                             <button
                               onClick={async () => {
                                 await addtoCart()
-                                navigate('/order')
+                                token && navigate('/order')
                               }}
                               className='w-full border text-lg px-32 py-4 rounded-lg hover:bg-black hover:text-white transition delay-75 duration-75 md:px-32 xs:px-8'
                             >
