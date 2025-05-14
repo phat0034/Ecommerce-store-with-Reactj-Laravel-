@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { assets } from '../../assets/assets'
 import Cookies from 'js-cookie'
-import { useNavigate,Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 const login = () => {
   const navigate = useNavigate()
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API; // Lấy từ .env
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_API // Lấy từ .env
   const [dataForm, setDataForm] = useState({
     username: '',
     password: '',
@@ -24,7 +24,8 @@ const login = () => {
     })
     let dataJson = await responseData.json()
     if (dataJson.success) {
-      navigate("/")
+      console.log(dataJson)
+      navigate('/')
       Cookies.set('authToken', dataJson.token, { expires: 1 })
       // window.history.replaceState({}, document.title, "/");
       alert('Login successful')
@@ -37,7 +38,7 @@ const login = () => {
 
   useEffect(() => {
     if (isLogin) {
-      navigate("/")
+      navigate('/')
     }
   })
   return (
