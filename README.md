@@ -5,10 +5,8 @@
 #### Database: MySQL
 #### Automatic Table & Data Generation Laravel Migrations & Seeders
 ## Demo
-
-##### Frontend: https://phat0034.github.io/Ecommerce-store-with-Reactj-Laravel-/
-##### Admin Page: https://phat0034.github.io/Admin-Page-TechStore/
-
+##### Frontend: https://ecommerce-store-with-reactj-laravel.vercel.app/
+##### Admin Page: https://admin-page-tech-store-2xszw6frl-downiis-projects.vercel.app/
 ## ✨ Core Features
 #### 🛍️ Product Features
 ##### ✅ Display all products
